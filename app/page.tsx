@@ -8,7 +8,7 @@ import { Footer } from "@/components/footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen dark:bg-black">
       <header className="sticky top-0 z-50 w-full border-b bg-black backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="flex h-14 items-center gap-4 px-4">
               <div className="flex flex-1 items-center justify-between">
@@ -47,6 +47,18 @@ export default function Home() {
             A shadcn-like CLI tool for installing complete full-stack modules with UI components,
             API routes, server actions, and hooks. Build production-ready SaaS features instantly.
           </p>
+          <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-2xl p-6 mb-8 max-w-4xl mx-auto border border-blue-200 dark:border-blue-800">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+              🧠 The Real Power: Concept-Based Learning
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 mb-3">
+              Learn <strong>payment concepts</strong> once, not Stripe-specific APIs. When we add Razorpay or PayPal,
+              your knowledge transfers instantly—same hooks, same patterns, same predictable structure.
+            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Focus on building features, not learning tool-specific implementations.
+            </p>
+          </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <Button size="lg" asChild className="text-lg px-8 py-6">

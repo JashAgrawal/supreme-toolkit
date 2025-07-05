@@ -16,7 +16,7 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar";
 
-const sidebarItems = [
+const sidebarItems : { title: string; items: { title: string; href: string; disabled?: boolean }[] }[] = [
   {
     title: "Getting Started",
     items: [
@@ -59,10 +59,10 @@ export default function DocsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <SidebarProvider className="bg-black">
-      <div className="min-h-screen bg-black">
-        <Sidebar className="bg-black">
-          <SidebarHeader className="border-b border-sidebar-border mt-12 bg-black">
+    <SidebarProvider className="dark:bg-black">
+      <div className="min-h-screen dark:bg-black">
+        <Sidebar className="dark:bg-black">
+          <SidebarHeader className="border-b border-sidebar-border mt-12 dark:bg-black">
             <div className="flex items-center gap-2 px-4 py-2">
               <Link href="/" className="flex items-center space-x-2">
                 <span className="text-lg font-bold">🚀 Supreme</span>
@@ -70,7 +70,7 @@ export default function DocsLayout({
               </Link>
             </div>
           </SidebarHeader>
-          <SidebarContent className="bg-black">
+          <SidebarContent className="dark:bg-black">
             {sidebarItems.map((section) => (
               <SidebarGroup key={section.title}>
                 <SidebarGroupLabel>{section.title}</SidebarGroupLabel>
@@ -78,7 +78,7 @@ export default function DocsLayout({
                   <SidebarMenu>
                     {section.items.map((item) => (
                       <SidebarMenuItem key={item.href}>
-                        <SidebarMenuButton asChild={!item.disabled} disabled={item.disabled}>
+                        <SidebarMenuButton asChild={!item?.disabled} disabled={item.disabled}>
                           {item.disabled ? (
                             <span className="text-muted-foreground cursor-not-allowed">
                               {item.title} <span className="text-xs">(Coming Soon)</span>
@@ -100,7 +100,7 @@ export default function DocsLayout({
 
         <SidebarInset>
           {/* Header */}
-          <header className="sticky top-0 z-50 w-full border-b bg-black backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <header className="sticky top-0 z-50 w-full border-b dark:bg-black backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="flex h-14 items-center gap-4 px-4">
               <div className="flex flex-1 items-center justify-between">
                 <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
