@@ -54,9 +54,9 @@ export default function InstallationDocsPage() {
               lightTheme="github-light"
               darkTheme="github-dark"
               commandMap={{
-                npm: "npx shadcn-ui@latest init",
-                yarn: "yarn dlx shadcn-ui@latest init",
-                pnpm: "pnpm dlx shadcn-ui@latest init"
+                npm: "npx shadcn@latest init",
+                yarn: "yarn dlx shadcn@latest init",
+                pnpm: "pnpm dlx shadcn@latest init"
               }}
             />
           </div>
@@ -71,9 +71,9 @@ export default function InstallationDocsPage() {
               lightTheme="github-light"
               darkTheme="github-dark"
               commandMap={{
-                npm: "npx shadcn-ui@latest add button card input label",
-                yarn: "yarn dlx shadcn-ui@latest add button card input label",
-                pnpm: "pnpm dlx shadcn-ui@latest add button card input label"
+                npm: "npx shadcn@latest add button card input label",
+                yarn: "yarn dlx shadcn@latest add button card input label",
+                pnpm: "pnpm dlx shadcn@latest add button card input label"
               }}
             />
           </div>
