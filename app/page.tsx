@@ -90,7 +90,7 @@ export default function Home() {
               </Button>
             </div>
             <code className="text-green-400 text-lg block">
-              npx shadcn@latest add "https://supreme.jashagrawal.in/r/auth-module"
+              npx shadcn@latest add "https://supreme.jashagrawal.in/r/auth-module.json"
             </code>
           </div>
         </div>
@@ -128,7 +128,7 @@ export default function Home() {
                     <Badge variant="secondary" className="text-xs">Email/Password</Badge>
                   </div>
                   <code className="text-xs bg-gray-100 dark:bg-gray-800 p-2 rounded block">
-                    npx shadcn@latest add "https://supreme.jashagrawal.in/r/auth-module"
+                    npx shadcn@latest add "https://supreme.jashagrawal.in/r/auth-module.json"
                   </code>
                   <Button asChild size="sm" className="w-full">
                     <Link href="/auth-demo">View Demo</Link>
@@ -158,7 +158,7 @@ export default function Home() {
                     <Badge variant="secondary" className="text-xs">Templates</Badge>
                   </div>
                   <code className="text-xs bg-gray-100 dark:bg-gray-800 p-2 rounded block">
-                    npx shadcn@latest add "https://supreme.jashagrawal.in/r/mailer-module"
+                    npx shadcn@latest add "https://supreme.jashagrawal.in/r/mailer-module.json"
                   </code>
                   <Button asChild size="sm" variant="outline" className="w-full">
                     <Link href="/docs/mailer">View Docs</Link>
@@ -188,7 +188,7 @@ export default function Home() {
                     <Badge variant="secondary" className="text-xs">Email Confirm</Badge>
                   </div>
                   <code className="text-xs bg-gray-100 dark:bg-gray-800 p-2 rounded block">
-                    npx shadcn@latest add "https://supreme.jashagrawal.in/r/waitlist-module"
+                    npx shadcn@latest add "https://supreme.jashagrawal.in/r/waitlist-module.json"
                   </code>
                   <Button asChild size="sm" className="w-full">
                     <Link href="/waitlist-demo">View Demo</Link>
@@ -218,7 +218,7 @@ export default function Home() {
                     <Badge variant="secondary" className="text-xs">SSR Safe</Badge>
                   </div>
                   <code className="text-xs bg-gray-100 dark:bg-gray-800 p-2 rounded block">
-                    npx shadcn@latest add "https://supreme.jashagrawal.in/r/theme-toggle"
+                    npx shadcn@latest add "https://supreme.jashagrawal.in/r/theme-toggle.json"
                   </code>
                   <Button asChild size="sm" className="w-full">
                     <Link href="/theme-demo">View Demo</Link>
@@ -262,7 +262,7 @@ export default function Home() {
                     <Badge variant="secondary" className="text-xs">Pay Button</Badge>
                   </div>
                   <code className="text-xs bg-gray-100 dark:bg-gray-800 p-2 rounded block">
-                    npx shadcn@latest add "https://supreme.jashagrawal.in/r/one-time-payment"
+                    npx shadcn@latest add "https://supreme.jashagrawal.in/r/one-time-payment.json"
                   </code>
                   <Button asChild size="sm" variant="outline" className="w-full">
                     <Link href="/docs/payments">View Docs</Link>
@@ -292,7 +292,7 @@ export default function Home() {
                     <Badge variant="secondary" className="text-xs">Reactivate</Badge>
                   </div>
                   <code className="text-xs bg-gray-100 dark:bg-gray-800 p-2 rounded block">
-                    npx shadcn@latest add "https://supreme.jashagrawal.in/r/subscriptions"
+                    npx shadcn@latest add "https://supreme.jashagrawal.in/r/subscriptions.json"
                   </code>
                   <Button asChild size="sm" variant="outline" className="w-full">
                     <Link href="/docs/subscriptions">View Docs</Link>
@@ -322,7 +322,7 @@ export default function Home() {
                     <Badge variant="secondary" className="text-xs">Invoices</Badge>
                   </div>
                   <code className="text-xs bg-gray-100 dark:bg-gray-800 p-2 rounded block">
-                    npx shadcn@latest add "https://supreme.jashagrawal.in/r/customer-portal"
+                    npx shadcn@latest add "https://supreme.jashagrawal.in/r/customer-portal.json"
                   </code>
                   <Button asChild size="sm" variant="outline" className="w-full">
                     <Link href="/docs/customer-portal">View Docs</Link>
@@ -371,7 +371,7 @@ export default function Home() {
             <div className="bg-gray-900 dark:bg-gray-800 p-6 rounded-lg">
               <h3 className="text-white font-semibold mb-4">Installation Command:</h3>
               <code className="text-green-400 text-sm block bg-gray-800 dark:bg-gray-700 p-4 rounded">
-                npx shadcn@latest add "https://supreme.jashagrawal.in/r/waitlist-component"
+                npx shadcn@latest add "https://supreme.jashagrawal.in/r/waitlist-component.json"
               </code>
 
               <h3 className="text-white font-semibold mb-2 mt-6">Usage:</h3>

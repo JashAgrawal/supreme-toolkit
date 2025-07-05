@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "supreme-toolkit",
-  "homepage": "https://supremetoolkit.in",
+  "homepage": "https://supreme.jashagrawal.in",
   "items": [
     {
       "name": "auth-module",
@@ -9,6 +9,7 @@
       "title": "Authentication Module",
       "description": "Complete authentication system with betterAuth, multiple providers (Google, GitHub, email/password), and auth guards",
       "dependencies": ["better-auth", "better-sqlite3"],
+      "devDependencies": ["@types/better-sqlite3"],
       "registryDependencies": ["button", "input", "label", "card", "avatar", "separator"],
       "files": [
         {
@@ -238,6 +239,32 @@
           "path": "app/api/stripe/customer-portal/route.ts",
           "type": "registry:lib",
           "target": "app/api/stripe/customer-portal/route.ts"
+        }
+      ]
+    },
+    {
+      "name": "theme-toggle",
+      "type": "registry:component",
+      "title": "Theme Toggle Module",
+      "description": "Comprehensive dark mode solution with theme provider and multiple toggle variants for Next.js applications",
+      "dependencies": ["next-themes"],
+      "registryDependencies": ["button", "dropdown-menu"],
+      "files": [
+        {
+          "path": "components/theme-provider.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/theme-toggle.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/theme-toggle-dropdown.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/theme-aware.tsx",
+          "type": "registry:component"
         }
       ]
     },

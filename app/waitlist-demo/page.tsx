@@ -260,7 +260,7 @@ export default function WaitlistDemoPage() {
                 </CardHeader>
                 <CardContent>
                   <code className="text-sm bg-gray-900 dark:bg-gray-800 text-green-400 p-4 rounded block">
-                    npx shadcn@latest add "https://supreme.jashagrawal.in/r/waitlist"
+                    npx shadcn@latest add "https://supreme.jashagrawal.in/r/waitlist-module.json"
                   </code>
                 </CardContent>
               </Card>

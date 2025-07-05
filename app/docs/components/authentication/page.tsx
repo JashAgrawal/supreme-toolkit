@@ -16,7 +16,7 @@ export default function AuthenticationPage() {
     setTimeout(() => setCopiedCode(null), 2000);
   };
 
-  const installCommand = `npx shadcn@latest add "https://supreme.jashagrawal.in/r/auth-module"`;
+  const installCommand = `npx shadcn@latest add "https://supreme.jashagrawal.in/r/auth-module.json"`;
 
   return (
     <div className="space-y-6">
@@ -103,6 +103,40 @@ export default function AuthenticationPage() {
               >
                 {copiedCode === 'install' ? '✓' : <Copy className="h-4 w-4" />}
               </Button>
+              
+
+            </div>
+
+             <div className="relative">
+              <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
+                <code>{"npx @better-auth/cli@latest generate"}</code>
+              </pre>
+              <Button
+                size="sm"
+                variant="ghost"
+                className="absolute top-2 right-2"
+                onClick={() => copyToClipboard("npx @better-auth/cli@latest generate", 'install')}
+              >
+                {copiedCode === 'install' ? '✓' : <Copy className="h-4 w-4" />}
+              </Button>
+              
+
+            </div>
+
+             <div className="relative">
+              <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
+                <code>{"npx @better-auth/cli@latest migrate"}</code>
+              </pre>
+              <Button
+                size="sm"
+                variant="ghost"
+                className="absolute top-2 right-2"
+                onClick={() => copyToClipboard("npx @better-auth/cli@latest migrate", 'install')}
+              >
+                {copiedCode === 'install' ? '✓' : <Copy className="h-4 w-4" />}
+              </Button>
+              
+
             </div>
             <div className="text-sm text-muted-foreground">
               <p className="font-medium mb-2">This installs:</p>

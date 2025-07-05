@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "theme-toggle",
+  "type": "registry:component",
+  "title": "Theme Toggle Module",
+  "description": "Comprehensive dark mode solution with theme provider and multiple toggle variants for Next.js applications",
+  "dependencies": [
+    "next-themes"
+  ],
+  "registryDependencies": [
+    "button",
+    "dropdown-menu"
+  ],
+  "files": [
+    {
+      "path": "components/theme-provider.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { ThemeProvider as NextThemesProvider, type ThemeProviderProps } from \"next-themes\"\n\nexport function ThemeProvider({ children, ...props }: ThemeProviderProps) {\n  return <NextThemesProvider {...props}>{children}</NextThemesProvider>\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "components/ui/theme-toggle.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Moon, Sun } from \"lucide-react\"\nimport { useTheme } from \"next-themes\"\n\nimport { Button } from \"@/components/ui/button\"\n\nexport function ThemeToggle() {\n  const { setTheme, theme } = useTheme()\n\n  return (\n    <Button\n      variant=\"ghost\"\n      size=\"sm\"\n      onClick={() => setTheme(theme === \"light\" ? \"dark\" : \"light\")}\n      className=\"h-9 w-9 px-0\"\n    >\n      <Sun className=\"h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0\" />\n      <Moon className=\"absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100\" />\n      <span className=\"sr-only\">Toggle theme</span>\n    </Button>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "components/ui/theme-toggle-dropdown.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Monitor, Moon, Sun } from \"lucide-react\"\nimport { useTheme } from \"next-themes\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuItem,\n  DropdownMenuTrigger,\n} from \"@/components/ui/dropdown-menu\"\n\nexport function ThemeToggleDropdown() {\n  const { setTheme, theme } = useTheme()\n  const [mounted, setMounted] = React.useState(false)\n\n  React.useEffect(() => {\n    setMounted(true)\n  }, [])\n\n  if (!mounted) {\n    return (\n      <Button variant=\"ghost\" size=\"sm\" className=\"h-9 w-9 px-0\">\n        <Sun className=\"h-[1.2rem] w-[1.2rem]\" />\n        <span className=\"sr-only\">Toggle theme</span>\n      </Button>\n    )\n  }\n\n  const getCurrentIcon = () => {\n    if (theme === \"light\") return <Sun className=\"h-[1.2rem] w-[1.2rem]\" />\n    if (theme === \"dark\") return <Moon className=\"h-[1.2rem] w-[1.2rem]\" />\n    return <Monitor className=\"h-[1.2rem] w-[1.2rem]\" />\n  }\n\n  return (\n    <DropdownMenu>\n      <DropdownMenuTrigger asChild>\n        <Button variant=\"ghost\" size=\"sm\" className=\"h-9 w-9 px-0\">\n          {getCurrentIcon()}\n          <span className=\"sr-only\">Toggle theme</span>\n        </Button>\n      </DropdownMenuTrigger>\n      <DropdownMenuContent align=\"end\">\n        <DropdownMenuItem onClick={() => setTheme(\"light\")}>\n          <Sun className=\"mr-2 h-4 w-4\" />\n          <span>Light</span>\n        </DropdownMenuItem>\n        <DropdownMenuItem onClick={() => setTheme(\"dark\")}>\n          <Moon className=\"mr-2 h-4 w-4\" />\n          <span>Dark</span>\n        </DropdownMenuItem>\n        <DropdownMenuItem onClick={() => setTheme(\"system\")}>\n          <Monitor className=\"mr-2 h-4 w-4\" />\n          <span>System</span>\n        </DropdownMenuItem>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "components/ui/theme-aware.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { useTheme } from \"next-themes\"\n\ninterface ThemeContext {\n  theme: string | undefined\n  resolvedTheme: string | undefined\n}\n\ninterface ThemeAwareProps {\n  children: React.ReactNode | ((context: ThemeContext) => React.ReactNode)\n  light?: React.ReactNode\n  dark?: React.ReactNode\n  system?: React.ReactNode\n  fallback?: React.ReactNode\n}\n\n/**\n * ThemeAware Component\n * \n * Conditionally renders content based on the current theme.\n * Useful for showing different content, icons, or styling based on theme.\n * \n * @example\n * <ThemeAware\n *   light={<SunIcon />}\n *   dark={<MoonIcon />}\n *   system={<MonitorIcon />}\n * />\n * \n * @example\n * <ThemeAware>\n *   {({ theme, resolvedTheme }) => (\n *     <div className={theme === 'dark' ? 'text-white' : 'text-black'}>\n *       Current theme: {resolvedTheme}\n *     </div>\n *   )}\n * </ThemeAware>\n */\nexport function ThemeAware({ \n  children, \n  light, \n  dark, \n  system, \n  fallback = null \n}: ThemeAwareProps) {\n  const { theme, resolvedTheme } = useTheme()\n  const [mounted, setMounted] = React.useState(false)\n\n  React.useEffect(() => {\n    setMounted(true)\n  }, [])\n\n  if (!mounted) {\n    return fallback ? <>{fallback}</> : null\n  }\n\n  // If specific theme content is provided, use it\n  if (theme === \"light\" && light) return <>{light}</>\n  if (theme === \"dark\" && dark) return <>{dark}</>\n  if (theme === \"system\" && system) return <>{system}</>\n\n  // If children is a function, call it with theme context\n  if (typeof children === \"function\") {\n    return <>{children({ theme, resolvedTheme })}</>\n  }\n\n  // Otherwise render children normally\n  return <>{children}</>\n}\n\n/**\n * useThemeAware Hook\n * \n * A hook that provides theme-aware utilities and state.\n * \n * @example\n * const { theme, isDark, isLight, isSystem, resolvedTheme } = useThemeAware();\n * \n * return (\n *   <div className={isDark ? 'bg-black' : 'bg-white'}>\n *     Theme: {resolvedTheme}\n *   </div>\n * );\n */\nexport function useThemeAware() {\n  const { theme, resolvedTheme, setTheme, systemTheme } = useTheme()\n  const [mounted, setMounted] = React.useState(false)\n\n  React.useEffect(() => {\n    setMounted(true)\n  }, [])\n\n  const isDark = mounted && resolvedTheme === \"dark\"\n  const isLight = mounted && resolvedTheme === \"light\"\n  const isSystem = mounted && theme === \"system\"\n\n  return {\n    theme,\n    resolvedTheme: mounted ? resolvedTheme : undefined,\n    systemTheme: mounted ? systemTheme : undefined,\n    setTheme,\n    isDark,\n    isLight,\n    isSystem,\n    mounted,\n  }\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

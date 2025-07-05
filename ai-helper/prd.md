@@ -12,7 +12,7 @@
 Supreme Toolkit is a full-stack component registry that works seamlessly with `shadcn/ui` and `Next.js`. It allows developers to add complete, production-ready modules with one command:
 
 ```bash
-npx shadcn@latest add "https://supreme.jashagrawal.in/r/module-name"
+npx shadcn@latest add "https://supreme.jashagrawal.in/r/module-name.json"
 ```
 
 Each module includes not only UI components but also server actions, API routes, hooks, and configuration, enabling instant integration of powerful features into any modern full-stack app.
@@ -145,7 +145,7 @@ Example structure for a module:
 ### Installation
 
 ```bash
-npx shadcn@latest add "https://supreme.jashagrawal.in/r/waitlist-component"
+npx shadcn@latest add "https://supreme.jashagrawal.in/r/waitlist-component.json"
 ```
 
 Creates:

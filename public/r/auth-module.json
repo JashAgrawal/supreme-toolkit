@@ -8,6 +8,9 @@
     "better-auth",
     "better-sqlite3"
   ],
+  "devDependencies": [
+    "@types/better-sqlite3"
+  ],
   "registryDependencies": [
     "button",
     "input",

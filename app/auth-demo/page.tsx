@@ -227,7 +227,7 @@ export default function AuthDemoPage() {
                   </CardHeader>
                   <CardContent>
                     <code className="text-sm bg-gray-900 dark:bg-gray-800 text-green-400 p-4 rounded block">
-                      npx shadcn@latest add "https://supreme.jashagrawal.in/r/auth"
+                      npx shadcn@latest add "https://supreme.jashagrawal.in/r/auth-module.json"
                     </code>
                   </CardContent>
                 </Card>

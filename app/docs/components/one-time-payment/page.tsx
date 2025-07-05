@@ -16,7 +16,7 @@ export default function OneTimePaymentPage() {
     setTimeout(() => setCopiedCode(null), 2000);
   };
 
-  const installCommand = `npx shadcn@latest add "https://supreme.jashagrawal.in/r/one-time-payment"`;
+  const installCommand = `npx shadcn@latest add "https://supreme.jashagrawal.in/r/one-time-payment.json"`;
 
   return (
     <div className="space-y-6">

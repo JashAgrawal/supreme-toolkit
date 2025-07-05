@@ -123,7 +123,7 @@ export default function ThemeDemo() {
                 </Button>
               </div>
               <code className="text-green-400 text-lg block">
-                npx shadcn@latest add "https://supreme.jashagrawal.in/r/theme-toggle"
+                npx shadcn@latest add "https://supreme.jashagrawal.in/r/theme-toggle.json"
               </code>
             </div>
           </CardContent>
