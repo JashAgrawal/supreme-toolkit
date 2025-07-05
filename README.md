@@ -1,36 +1,201 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Supreme Toolkit
 
-## Getting Started
+A shadcn-like CLI tool for installing full-stack components with API routes, server actions, hooks, and configuration. Build complete SaaS features in seconds.
 
-First, run the development server:
+## 🎯 What is Supreme Toolkit?
+
+Supreme Toolkit is a full-stack component registry that works seamlessly with `shadcn/ui` and `Next.js`. It allows developers to add complete, production-ready modules with one command:
+
+```bash
+npx shadcn@latest add "https://supremetoolkit.in/r/module-name"
+```
+
+Each module includes not only UI components but also server actions, API routes, hooks, and configuration, enabling instant integration of powerful features into any modern full-stack app.
+
+## ✨ Features
+
+- 🔐 **Authentication** - betterAuth with Google, GitHub, Email providers
+- 💳 **Payments** - Complete Stripe integration with webhooks
+- 💬 **Chat** - Realtime chat with Supabase/Pusher
+- 🤖 **Chatbot** - OpenAI-powered chatbot widget
+- 🎫 **Support** - Complete ticketing system
+- 📧 **Email** - Resend/Nodemailer integration
+- 📝 **Rich Text** - Tiptap editor with collaboration
+- 📊 **Analytics** - Custom event tracking
+- 🖼️ **Uploads** - Cloudinary/S3 image uploads
+- 📋 **Waitlist** - Email capture with management
+- 💌 **Newsletter** - Subscription management
+- 🔗 **Webhooks** - Generic webhook handlers
+- 💭 **Feedback** - User feedback widgets
+
+## 🚀 Quick Start
+
+### 1. Clone and Setup
+
+```bash
+git clone https://github.com/yourusername/supreme-toolkit.git
+cd supreme-toolkit
+npm install
+```
+
+### 2. Environment Setup
+
+```bash
+cp .env.example .env.local
+# Fill in your API keys and configuration
+```
+
+### 3. Configure Modules
+
+Edit `config.tsx` to enable the modules you want to use:
+
+```typescript
+export const toolkitConfig: ToolkitConfig = {
+  auth: {
+    providers: ['google', 'email', 'github'],
+  },
+  stripe: {
+    apiKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
+    productIds: ['prod_example1', 'prod_example2'],
+  },
+  // ... other modules
+};
+```
+
+### 4. Start Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see your app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📦 Available Modules
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Module | Description | Status |
+|--------|-------------|--------|
+| `auth` | betterAuth + OAuth providers | 🔄 In Development |
+| `stripe-subscription-gateway` | Complete Stripe integration | 🔄 In Development |
+| `chat-realtime` | Realtime chat system | 📋 Planned |
+| `chatbot-gpt` | OpenAI chatbot widget | 📋 Planned |
+| `support-ticket-system` | End-to-end ticketing | 📋 Planned |
+| `image-uploader` | Cloudinary/S3 uploads | 📋 Planned |
+| `rich-text-editor` | Tiptap editor | 📋 Planned |
+| `analytics-snippet` | Custom analytics | 📋 Planned |
+| `waitlist-component` | Email capture | 📋 Planned |
+| `newsletter-subscription` | Email subscriptions | 📋 Planned |
+| `feedback-widget` | User feedback | 📋 Planned |
+| `webhook-handler` | Webhook management | 📋 Planned |
 
-## Learn More
+## 🏗️ Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+supreme-toolkit/
+├── app/                    # Next.js app directory
+├── components/             # React components
+│   └── ui/                # shadcn/ui components
+├── hooks/                 # Custom React hooks
+├── actions/               # Server actions
+├── lib/                   # Utility libraries
+├── types/                 # TypeScript definitions
+├── registry/              # Module registry
+│   └── supremetoolkit/    # Supreme Toolkit modules
+├── config.tsx             # Central configuration
+└── .env.example          # Environment variables template
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔧 Configuration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Supreme Toolkit uses a centralized configuration system in `config.tsx`. This file contains all module configurations and environment variables.
 
-## Deploy on Vercel
+### Example Configuration
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```typescript
+export const toolkitConfig: ToolkitConfig = {
+  auth: {
+    providers: ['google', 'email', 'github'],
+  },
+  stripe: {
+    apiKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
+    productIds: ['prod_123', 'prod_456'],
+    successUrl: '/payment/success',
+    cancelUrl: '/payment/cancel',
+  },
+  resend: {
+    apiKey: process.env.RESEND_API_KEY!,
+    fromEmail: 'noreply@yourapp.com',
+  },
+};
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎨 Server Actions Pattern
+
+Each module includes event-driven server actions that you can customize:
+
+```typescript
+// Example: Auth module server actions
+export async function onUserSignup(params: {
+  user: User;
+  provider: string;
+}) {
+  // Your custom logic here
+  console.log(`New user signed up: ${params.user.email}`);
+
+  // Send welcome email
+  // Update analytics
+  // Create user profile
+}
+
+export async function onUserLogin(params: {
+  user: User;
+  isFirstLogin: boolean;
+}) {
+  // Your custom login logic
+}
+```
+
+## 🧪 Development
+
+### Running Tests
+
+```bash
+npm run test
+```
+
+### Building for Production
+
+```bash
+npm run build
+```
+
+### Linting
+
+```bash
+npm run lint
+```
+
+## 📚 Documentation
+
+- [Getting Started Guide](./docs/getting-started.md)
+- [Module Development](./docs/module-development.md)
+- [Configuration Reference](./docs/configuration.md)
+- [API Reference](./docs/api-reference.md)
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md) for details.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [shadcn/ui](https://ui.shadcn.com/) for the component system inspiration
+- [Next.js](https://nextjs.org/) for the amazing framework
+- [Tailwind CSS](https://tailwindcss.com/) for styling
+- All the amazing open-source libraries we integrate with
+
+---
+
+**Built with ❤️ for the developer community**

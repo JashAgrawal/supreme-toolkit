@@ -1,0 +1,264 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "supreme-toolkit",
+  "homepage": "https://supremetoolkit.in",
+  "items": [
+    {
+      "name": "auth-module",
+      "type": "registry:component",
+      "title": "Authentication Module",
+      "description": "Complete authentication system with betterAuth, multiple providers (Google, GitHub, email/password), and auth guards",
+      "dependencies": ["better-auth", "better-sqlite3"],
+      "registryDependencies": ["button", "input", "label", "card", "avatar", "separator"],
+      "files": [
+        {
+          "path": "lib/auth.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lib/auth-client.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "hooks/use-auth.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "components/ui/auth-signin.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/auth-signup.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/auth-signout.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/auth-guards.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/user-profile.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "actions/auth-actions.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "app/api/auth/[...all]/route.ts",
+          "type": "registry:lib",
+          "target": "app/api/auth/[...all]/route.ts"
+        }
+      ]
+    },
+    {
+      "name": "mailer-module",
+      "type": "registry:component",
+      "title": "Universal Mailer Module",
+      "description": "Unified email system with auto-detection for Resend and Nodemailer, email templates, and testing components",
+      "dependencies": ["resend", "nodemailer", "@react-email/components"],
+      "registryDependencies": ["button", "input", "label", "card", "textarea"],
+      "files": [
+        {
+          "path": "lib/mailer.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lib/mailer-resend.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lib/mailer-nodemailer.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "hooks/use-mailer.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "components/ui/email-templates.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/mailer-test.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "actions/mailer-actions.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "waitlist-module",
+      "type": "registry:component",
+      "title": "Waitlist Component",
+      "description": "Complete waitlist system with email collection, validation, duplicate checking, and email confirmations",
+      "dependencies": ["zod"],
+      "registryDependencies": ["button", "input", "label", "card"],
+      "files": [
+        {
+          "path": "components/ui/waitlist-form.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "hooks/use-waitlist.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "actions/waitlist-actions.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "app/api/waitlist/route.ts",
+          "type": "registry:lib",
+          "target": "app/api/waitlist/route.ts"
+        }
+      ]
+    },
+    {
+      "name": "one-time-payment",
+      "type": "registry:component",
+      "title": "One-Time Payment Module",
+      "description": "Stripe integration for one-time payments with checkout sessions and payment processing",
+      "dependencies": ["stripe", "@stripe/stripe-js"],
+      "registryDependencies": ["button", "card"],
+      "files": [
+        {
+          "path": "lib/stripe.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "hooks/use-stripe.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "components/ui/pay-button.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "actions/stripe-actions.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "app/api/stripe/create-checkout-session/route.ts",
+          "type": "registry:lib",
+          "target": "app/api/stripe/create-checkout-session/route.ts"
+        },
+        {
+          "path": "app/api/stripe/webhooks/route.ts",
+          "type": "registry:lib",
+          "target": "app/api/stripe/webhooks/route.ts"
+        }
+      ]
+    },
+    {
+      "name": "subscriptions",
+      "type": "registry:component",
+      "title": "Stripe Subscriptions Module",
+      "description": "Complete subscription management with pricing plans, subscription lifecycle, and recurring billing",
+      "dependencies": ["stripe", "@stripe/stripe-js"],
+      "registryDependencies": ["button", "card", "badge", "separator"],
+      "files": [
+        {
+          "path": "lib/stripe.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lib/pricing.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "hooks/use-stripe.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "components/ui/pricing-card.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/subscription-manager.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "actions/stripe-actions.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "app/api/stripe/create-checkout-session/route.ts",
+          "type": "registry:lib",
+          "target": "app/api/stripe/create-checkout-session/route.ts"
+        },
+        {
+          "path": "app/api/stripe/subscription/route.ts",
+          "type": "registry:lib",
+          "target": "app/api/stripe/subscription/route.ts"
+        },
+        {
+          "path": "app/api/stripe/cancel-subscription/route.ts",
+          "type": "registry:lib",
+          "target": "app/api/stripe/cancel-subscription/route.ts"
+        },
+        {
+          "path": "app/api/stripe/reactivate-subscription/route.ts",
+          "type": "registry:lib",
+          "target": "app/api/stripe/reactivate-subscription/route.ts"
+        },
+        {
+          "path": "app/api/stripe/webhooks/route.ts",
+          "type": "registry:lib",
+          "target": "app/api/stripe/webhooks/route.ts"
+        }
+      ]
+    },
+    {
+      "name": "customer-portal",
+      "type": "registry:component",
+      "title": "Stripe Customer Portal Module",
+      "description": "Self-service customer portal for managing billing, subscriptions, and payment methods",
+      "dependencies": ["stripe", "@stripe/stripe-js"],
+      "registryDependencies": ["button", "card"],
+      "files": [
+        {
+          "path": "lib/stripe.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "hooks/use-stripe.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "actions/stripe-actions.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "app/api/stripe/customer-portal/route.ts",
+          "type": "registry:lib",
+          "target": "app/api/stripe/customer-portal/route.ts"
+        }
+      ]
+    },
+    {
+      "name": "config-module",
+      "type": "registry:component",
+      "title": "Supreme Toolkit Configuration",
+      "description": "Central configuration system for managing API keys, settings, and module configurations",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "config.tsx",
+          "type": "registry:lib",
+          "target": "config.tsx"
+        },
+        {
+          "path": "types/index.ts",
+          "type": "registry:lib"
+        }
+      ]
+    }
+  ]
+}
