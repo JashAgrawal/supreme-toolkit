@@ -72,20 +72,30 @@ Open [http://localhost:3000](http://localhost:3000) to see your app.
 
 ## 📦 Available Modules
 
+### ✅ Ready Modules
 | Module | Description | Status |
 |--------|-------------|--------|
-| `auth` | betterAuth + OAuth providers | 🔄 In Development |
-| `stripe-subscription-gateway` | Complete Stripe integration | 🔄 In Development |
-| `chat-realtime` | Realtime chat system | 📋 Planned |
-| `chatbot-gpt` | OpenAI chatbot widget | 📋 Planned |
-| `support-ticket-system` | End-to-end ticketing | 📋 Planned |
-| `image-uploader` | Cloudinary/S3 uploads | 📋 Planned |
-| `rich-text-editor` | Tiptap editor | 📋 Planned |
-| `analytics-snippet` | Custom analytics | 📋 Planned |
-| `waitlist-component` | Email capture | 📋 Planned |
-| `newsletter-subscription` | Email subscriptions | 📋 Planned |
-| `feedback-widget` | User feedback | 📋 Planned |
-| `webhook-handler` | Webhook management | 📋 Planned |
+| `auth-module` | betterAuth + OAuth providers (Google, GitHub, email/password) | ✅ Ready |
+| `mailer-module` | Universal email system with Resend and Nodemailer support | ✅ Ready |
+| `waitlist-module` | Email capture with validation, duplicate checking, and confirmations | ✅ Ready |
+| `theme-toggle` | Dark mode solution with theme provider and multiple toggle variants | ✅ Ready |
+| `one-time-payment` | Stripe integration for one-time payments | ✅ Ready |
+| `subscriptions` | Complete Stripe subscription management | ✅ Ready |
+| `customer-portal` | Self-service portal for billing and subscription management | ✅ Ready |
+
+### 🚀 Coming Soon Modules
+| Module | Description | Status |
+|--------|-------------|--------|
+| `chat-realtime` | Realtime chat system with Supabase or Pusher backend | 🔜 Coming Soon |
+| `chatbot-gpt` | AI chatbot widget with OpenAI integration and backend logic | 🔜 Coming Soon |
+| `support-ticket-system` | End-to-end ticketing interface with API and management system | 🔜 Coming Soon |
+| `webhook-handler` | Generic webhook endpoint with logger UI and event processing | 🔜 Coming Soon |
+| `newsletter-subscription` | Email capture with MailerLite/Postmark integration and automation | 🔜 Coming Soon |
+| `feedback-widget` | User feedback form with webhook/email integration and analytics | 🔜 Coming Soon |
+| `image-uploader` | Drag/drop image uploader with Cloudinary/S3 backend integration | 🔜 Coming Soon |
+| `analytics-snippet` | Drop-in analytics with server and client-side event logging | 🔜 Coming Soon |
+| `rich-text-editor` | Notion-like rich text editor powered by Tiptap with collaborative features | 🔜 Coming Soon |
+| `webhook-logger` | Log and inspect third-party webhooks with debugging interface | 🔜 Coming Soon |
 
 ## 🏗️ Project Structure
 

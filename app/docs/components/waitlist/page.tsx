@@ -2,20 +2,21 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { ScriptCopyBtn } from "@/components/magicui/script-copy-btn";
 import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
 import { useState } from "react";
+import { Copy } from "lucide-react";
 
 export default function WaitlistPage() {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
-  const copyToClipboard = (code: string, id: string) => {
-    navigator.clipboard.writeText(code);
-    setCopiedCode(id);
-    setTimeout(() => setCopiedCode(null), 2000);
+   const copyToClipboard = (text: string, codeName: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedCode(codeName);
+    setTimeout(() => {
+      setCopiedCode(null);
+    }, 1000);
   };
-
-  const installCommand = `npx shadcn@latest add "https://supreme.jashagrawal.in/r/waitlist-modul.json"`;
 
   return (
     <div className="space-y-6">
@@ -90,19 +91,16 @@ export default function WaitlistPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            <div className="relative">
-              <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <code>{installCommand}</code>
-              </pre>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="absolute top-2 right-2"
-                onClick={() => copyToClipboard(installCommand, 'install')}
-              >
-                {copiedCode === 'install' ? '✓' : <Copy className="h-4 w-4" />}
-              </Button>
-            </div>
+            <ScriptCopyBtn
+              codeLanguage="bash"
+              lightTheme="github-light"
+              darkTheme="github-dark"
+              commandMap={{
+                npm: "npx shadcn@latest add \"https://supremetoolkit.in/r/waitlist-module\"",
+                yarn: "yarn dlx shadcn@latest add \"https://supremetoolkit.in/r/waitlist-module\"",
+                pnpm: "pnpm dlx shadcn@latest add \"https://supremetoolkit.in/r/waitlist-module\""
+              }}
+            />
             <div className="text-sm text-muted-foreground">
               <p className="font-medium mb-2">This installs:</p>
               <ul className="space-y-1 ml-4">
@@ -114,6 +112,129 @@ export default function WaitlistPage() {
                 <li>• Duplicate checking and position tracking</li>
                 <li>• Required dependencies (zod for validation)</li>
               </ul>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Environment Variables */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            🔧 Environment Variables & Setup
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
+              <h4 className="font-medium mb-2 text-blue-800 dark:text-blue-200">
+                Email Integration Required
+              </h4>
+              <p className="text-sm text-blue-700 dark:text-blue-300">
+                The waitlist module requires email functionality for sending confirmation emails.
+                Install and configure the mailer module first.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">1. Install Mailer Module (Required):</h4>
+              <ScriptCopyBtn
+                codeLanguage="bash"
+                lightTheme="github-light"
+                darkTheme="github-dark"
+                commandMap={{
+                  npm: "npx shadcn@latest add \"https://supremetoolkit.in/r/mailer-module\"",
+                  yarn: "yarn dlx shadcn@latest add \"https://supremetoolkit.in/r/mailer-module\"",
+                  pnpm: "pnpm dlx shadcn@latest add \"https://supremetoolkit.in/r/mailer-module\""
+                }}
+              />
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">2. Configure Email Provider:</h4>
+              <p className="text-sm text-muted-foreground mb-3">
+                Choose one email provider (Resend recommended):
+              </p>
+              <div className="relative">
+                <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
+                  <code>{`# .env.local
+# Option 1: Resend (Recommended)
+RESEND_API_KEY=re_your_api_key_here
+
+# Option 2: SMTP
+# EMAIL_PROVIDER=smtp
+# SMTP_HOST=smtp.your-provider.com
+# SMTP_USER=your-email@domain.com
+# SMTP_PASSWORD=your-password
+
+# Option 3: Gmail
+# EMAIL_PROVIDER=gmail
+# GMAIL_USER=your-email@gmail.com
+# GMAIL_APP_PASSWORD=your-app-password`}</code>
+                </pre>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="absolute top-2 right-2"
+                  onClick={() => copyToClipboard(`# .env.local
+# Option 1: Resend (Recommended)
+RESEND_API_KEY=re_your_api_key_here
+
+# Option 2: SMTP
+# EMAIL_PROVIDER=smtp
+# SMTP_HOST=smtp.your-provider.com
+# SMTP_USER=your-email@domain.com
+# SMTP_PASSWORD=your-password
+
+# Option 3: Gmail
+# EMAIL_PROVIDER=gmail
+# GMAIL_USER=your-email@gmail.com
+# GMAIL_APP_PASSWORD=your-app-password`, 'waitlist-env')}
+                >
+                  {copiedCode === 'waitlist-env' ? '✓' : <Copy className="h-4 w-4" />}
+                </Button>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">3. Configure Waitlist Settings in config.tsx:</h4>
+              <div className="relative">
+                <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
+                  <code>{`export const toolkitConfig: ToolkitConfig = {
+  waitlist: {
+    successRedirect: '/thanks',
+    emailNotifications: true,
+    autoApprove: false, // Set to true to auto-approve all signups
+  },
+  // ... other config
+};`}</code>
+                </pre>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="absolute top-2 right-2"
+                  onClick={() => copyToClipboard(`export const toolkitConfig: ToolkitConfig = {
+  waitlist: {
+    successRedirect: '/thanks',
+    emailNotifications: true,
+    autoApprove: false, // Set to true to auto-approve all signups
+  },
+  // ... other config
+};`, 'waitlist-config')}
+                >
+                  {copiedCode === 'waitlist-config' ? '✓' : <Copy className="h-4 w-4" />}
+                </Button>
+              </div>
+            </div>
+
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4">
+              <h4 className="font-medium mb-2 text-yellow-800 dark:text-yellow-200">
+                Database Storage
+              </h4>
+              <p className="text-sm text-yellow-700 dark:text-yellow-300">
+                The waitlist module stores data in memory by default. For production, consider integrating
+                with a database or external service like Airtable, Notion, or a simple JSON file.
+              </p>
             </div>
           </div>
         </CardContent>

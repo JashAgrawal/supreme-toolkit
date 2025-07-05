@@ -3,20 +3,21 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { ScriptCopyBtn } from "@/components/magicui/script-copy-btn";
 import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
 import { useState } from "react";
+import { Copy } from "lucide-react";
 
 export default function SubscriptionsPage() {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
-  const copyToClipboard = (code: string, id: string) => {
-    navigator.clipboard.writeText(code);
-    setCopiedCode(id);
-    setTimeout(() => setCopiedCode(null), 2000);
+   const copyToClipboard = (text: string, codeName: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedCode(codeName);
+    setTimeout(() => {
+      setCopiedCode(null);
+    }, 1000);
   };
-
-  const installCommand = `npx shadcn@latest add "https://supreme.jashagrawal.in/r/subscriptions.json"`;
 
   return (
     <div className="space-y-6">
@@ -91,19 +92,16 @@ export default function SubscriptionsPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            <div className="relative">
-              <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <code>{installCommand}</code>
-              </pre>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="absolute top-2 right-2"
-                onClick={() => copyToClipboard(installCommand, 'install')}
-              >
-                {copiedCode === 'install' ? '✓' : <Copy className="h-4 w-4" />}
-              </Button>
-            </div>
+            <ScriptCopyBtn
+              codeLanguage="bash"
+              lightTheme="github-light"
+              darkTheme="github-dark"
+              commandMap={{
+                npm: "npx shadcn@latest add \"https://supremetoolkit.in/r/subscriptions\"",
+                yarn: "yarn dlx shadcn@latest add \"https://supremetoolkit.in/r/subscriptions\"",
+                pnpm: "pnpm dlx shadcn@latest add \"https://supremetoolkit.in/r/subscriptions\""
+              }}
+            />
             <div className="text-sm text-muted-foreground">
               <p className="font-medium mb-2">This installs:</p>
               <ul className="space-y-1 ml-4">
@@ -115,6 +113,148 @@ export default function SubscriptionsPage() {
                 <li>• API routes for subscription management</li>
                 <li>• Required dependencies (stripe, @stripe/stripe-js)</li>
               </ul>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Environment Variables */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            🔧 Environment Variables & Setup
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
+              <h4 className="font-medium mb-2 text-blue-800 dark:text-blue-200">
+                Stripe Account Required
+              </h4>
+              <p className="text-sm text-blue-700 dark:text-blue-300">
+                You need a Stripe account with subscription products configured. Sign up at{' '}
+                <a href="https://stripe.com" target="_blank" rel="noopener noreferrer" className="underline">
+                  stripe.com
+                </a>{' '}
+                and set up your subscription products.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">1. Add Stripe API Keys:</h4>
+              <div className="relative">
+                <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
+                  <code>{`# .env.local
+# Required - Get these from your Stripe Dashboard
+STRIPE_SECRET_KEY=sk_test_your_secret_key_here
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_your_publishable_key_here
+
+# Required for webhooks (essential for subscriptions)
+STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret_here`}</code>
+                </pre>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="absolute top-2 right-2"
+                  onClick={() => copyToClipboard(`# .env.local
+# Required - Get these from your Stripe Dashboard
+STRIPE_SECRET_KEY=sk_test_your_secret_key_here
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_your_publishable_key_here
+
+# Required for webhooks (essential for subscriptions)
+STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret_here`, 'subs-env')}
+                >
+                  {copiedCode === 'subs-env' ? '✓' : <Copy className="h-4 w-4" />}
+                </Button>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">2. Create Subscription Products in Stripe:</h4>
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <p>• Go to Stripe Dashboard → Products</p>
+                <p>• Create products with recurring pricing (monthly/yearly)</p>
+                <p>• Copy the price IDs (starts with 'price_')</p>
+                <p>• Note: Use price IDs, not product IDs for subscriptions</p>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">3. Configure Pricing in lib/pricing.ts:</h4>
+              <div className="relative">
+                <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
+                  <code>{`export const pricingPlans = [
+  {
+    id: 'starter',
+    name: 'Starter',
+    price: 9,
+    interval: 'month',
+    stripePriceId: 'price_your_starter_monthly_price_id',
+    features: ['Feature 1', 'Feature 2'],
+  },
+  {
+    id: 'pro',
+    name: 'Pro',
+    price: 29,
+    interval: 'month',
+    stripePriceId: 'price_your_pro_monthly_price_id',
+    features: ['All Starter features', 'Feature 3', 'Feature 4'],
+  },
+];`}</code>
+                </pre>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="absolute top-2 right-2"
+                  onClick={() => copyToClipboard(`export const pricingPlans = [
+  {
+    id: 'starter',
+    name: 'Starter',
+    price: 9,
+    interval: 'month',
+    stripePriceId: 'price_your_starter_monthly_price_id',
+    features: ['Feature 1', 'Feature 2'],
+  },
+  {
+    id: 'pro',
+    name: 'Pro',
+    price: 29,
+    interval: 'month',
+    stripePriceId: 'price_your_pro_monthly_price_id',
+    features: ['All Starter features', 'Feature 3', 'Feature 4'],
+  },
+];`, 'pricing-config')}
+                >
+                  {copiedCode === 'pricing-config' ? '✓' : <Copy className="h-4 w-4" />}
+                </Button>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">4. Set up Webhooks (Required for Subscriptions):</h4>
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <p>• Go to Stripe Dashboard → Webhooks</p>
+                <p>• Add endpoint: <code className="bg-muted px-1 rounded">https://yourdomain.com/api/stripe/webhooks</code></p>
+                <p>• Select events:</p>
+                <ul className="ml-4 space-y-1">
+                  <li>- <code className="bg-muted px-1 rounded">customer.subscription.created</code></li>
+                  <li>- <code className="bg-muted px-1 rounded">customer.subscription.updated</code></li>
+                  <li>- <code className="bg-muted px-1 rounded">customer.subscription.deleted</code></li>
+                  <li>- <code className="bg-muted px-1 rounded">invoice.payment_succeeded</code></li>
+                  <li>- <code className="bg-muted px-1 rounded">invoice.payment_failed</code></li>
+                </ul>
+                <p>• Copy the webhook signing secret to your .env.local file</p>
+              </div>
+            </div>
+
+            <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-4">
+              <h4 className="font-medium mb-2 text-red-800 dark:text-red-200">
+                Webhooks Are Essential
+              </h4>
+              <p className="text-sm text-red-700 dark:text-red-300">
+                Unlike one-time payments, subscriptions require webhooks to handle recurring billing,
+                failed payments, and subscription status changes. Make sure to set up webhooks before going live.
+              </p>
             </div>
           </div>
         </CardContent>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { ThemeToggleDropdown } from "@/components/ui/theme-toggle-dropdown";
+import { Footer } from "@/components/footer";
 import {
   Sidebar,
   SidebarContent,
@@ -34,6 +35,21 @@ const sidebarItems = [
       { title: "Subscriptions", href: "/docs/components/subscriptions" },
       { title: "Customer Portal", href: "/docs/components/customer-portal" },
     ]
+  },
+  {
+    title: "Coming Soon",
+    items: [
+      { title: "Realtime Chat", href: "/docs/components/chat-realtime", disabled: true },
+      { title: "GPT Chatbot", href: "/docs/components/chatbot-gpt", disabled: true },
+      { title: "Support Tickets", href: "/docs/components/support-tickets", disabled: true },
+      { title: "Webhook Handler", href: "/docs/components/webhook-handler", disabled: true },
+      { title: "Newsletter", href: "/docs/components/newsletter", disabled: true },
+      { title: "Feedback Widget", href: "/docs/components/feedback-widget", disabled: true },
+      { title: "Image Uploader", href: "/docs/components/image-uploader", disabled: true },
+      { title: "Analytics", href: "/docs/components/analytics", disabled: true },
+      { title: "Rich Text Editor", href: "/docs/components/rich-text-editor", disabled: true },
+      { title: "Webhook Logger", href: "/docs/components/webhook-logger", disabled: true },
+    ]
   }
 ];
 
@@ -62,10 +78,16 @@ export default function DocsLayout({
                   <SidebarMenu>
                     {section.items.map((item) => (
                       <SidebarMenuItem key={item.href}>
-                        <SidebarMenuButton asChild>
-                          <Link href={item.href}>
-                            {item.title}
-                          </Link>
+                        <SidebarMenuButton asChild={!item.disabled} disabled={item.disabled}>
+                          {item.disabled ? (
+                            <span className="text-muted-foreground cursor-not-allowed">
+                              {item.title} <span className="text-xs">(Coming Soon)</span>
+                            </span>
+                          ) : (
+                            <Link href={item.href}>
+                              {item.title}
+                            </Link>
+                          )}
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     ))}
@@ -108,6 +130,11 @@ export default function DocsLayout({
               {children}
             </div>
           </main>
+
+          {/* Footer */}
+          <div className="pl-96">
+            <Footer />
+          </div>
         </SidebarInset>
       </div>
     </SidebarProvider>

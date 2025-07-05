@@ -3,20 +3,21 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { ScriptCopyBtn } from "@/components/magicui/script-copy-btn";
 import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
 import { useState } from "react";
+import { Copy } from "lucide-react";
 
 export default function CustomerPortalPage() {
-  const [copiedCode, setCopiedCode] = useState<string | null>(null);
+   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
-  const copyToClipboard = (code: string, id: string) => {
-    navigator.clipboard.writeText(code);
-    setCopiedCode(id);
-    setTimeout(() => setCopiedCode(null), 2000);
+   const copyToClipboard = (text: string, codeName: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedCode(codeName);
+    setTimeout(() => {
+      setCopiedCode(null);
+    }, 1000);
   };
-
-  const installCommand = `npx shadcn@latest add "https://supreme.jashagrawal.in/r/customer-portal.json"`;
 
   return (
     <div className="space-y-6">
@@ -91,19 +92,16 @@ export default function CustomerPortalPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            <div className="relative">
-              <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <code>{installCommand}</code>
-              </pre>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="absolute top-2 right-2"
-                onClick={() => copyToClipboard(installCommand, 'install')}
-              >
-                {copiedCode === 'install' ? '✓' : <Copy className="h-4 w-4" />}
-              </Button>
-            </div>
+            <ScriptCopyBtn
+              codeLanguage="bash"
+              lightTheme="github-light"
+              darkTheme="github-dark"
+              commandMap={{
+                npm: "npx shadcn@latest add \"https://supremetoolkit.in/r/customer-portal\"",
+                yarn: "yarn dlx shadcn@latest add \"https://supremetoolkit.in/r/customer-portal\"",
+                pnpm: "pnpm dlx shadcn@latest add \"https://supremetoolkit.in/r/customer-portal\""
+              }}
+            />
             <div className="text-sm text-muted-foreground">
               <p className="font-medium mb-2">This installs:</p>
               <ul className="space-y-1 ml-4">
@@ -114,6 +112,110 @@ export default function CustomerPortalPage() {
                 <li>• Secure session handling and validation</li>
                 <li>• Required dependencies (stripe, @stripe/stripe-js)</li>
               </ul>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Environment Variables */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            🔧 Environment Variables & Setup
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
+              <h4 className="font-medium mb-2 text-blue-800 dark:text-blue-200">
+                Requires Existing Stripe Customers
+              </h4>
+              <p className="text-sm text-blue-700 dark:text-blue-300">
+                The customer portal is for existing Stripe customers with subscriptions or payment history.
+                Install the subscriptions module first to create customers.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">1. Add Stripe API Keys:</h4>
+              <div className="relative">
+                <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
+                  <code>{`# .env.local
+# Required - Get these from your Stripe Dashboard
+STRIPE_SECRET_KEY=sk_test_your_secret_key_here
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_your_publishable_key_here`}</code>
+                </pre>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="absolute top-2 right-2"
+                  onClick={() => copyToClipboard(`# .env.local
+# Required - Get these from your Stripe Dashboard
+STRIPE_SECRET_KEY=sk_test_your_secret_key_here
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_your_publishable_key_here`, 'portal-env')}
+                >
+                  {copiedCode === 'portal-env' ? '✓' : <Copy className="h-4 w-4" />}
+                </Button>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">2. Configure Customer Portal in Stripe Dashboard:</h4>
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <p>• Go to Stripe Dashboard → Settings → Billing → Customer Portal</p>
+                <p>• Enable the customer portal</p>
+                <p>• Configure allowed features:</p>
+                <ul className="ml-4 space-y-1">
+                  <li>- Update payment methods</li>
+                  <li>- View billing history</li>
+                  <li>- Download invoices</li>
+                  <li>- Cancel subscriptions (optional)</li>
+                  <li>- Update subscription quantities (optional)</li>
+                </ul>
+                <p>• Set your business information and branding</p>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">3. Set Return URL:</h4>
+              <p className="text-sm text-muted-foreground mb-3">
+                Configure where customers return after using the portal:
+              </p>
+              <div className="relative">
+                <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
+                  <code>{`// In your customer portal configuration
+return_url: 'https://yourdomain.com/dashboard'`}</code>
+                </pre>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="absolute top-2 right-2"
+                  onClick={() => copyToClipboard(`// In your customer portal configuration
+return_url: 'https://yourdomain.com/dashboard'`, 'return-url')}
+                >
+                  {copiedCode === 'return-url' ? '✓' : <Copy className="h-4 w-4" />}
+                </Button>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">4. Prerequisites:</h4>
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <p>• Install authentication module for user management</p>
+                <p>• Install subscriptions module to create Stripe customers</p>
+                <p>• Ensure users have associated Stripe customer IDs</p>
+                <p>• Test with customers who have active subscriptions</p>
+              </div>
+            </div>
+
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4">
+              <h4 className="font-medium mb-2 text-yellow-800 dark:text-yellow-200">
+                Customer ID Required
+              </h4>
+              <p className="text-sm text-yellow-700 dark:text-yellow-300">
+                Each user must have a Stripe customer ID stored in your database.
+                This is typically created when they make their first purchase or subscription.
+              </p>
             </div>
           </div>
         </CardContent>

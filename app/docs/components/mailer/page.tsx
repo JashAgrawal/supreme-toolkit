@@ -3,20 +3,22 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { ScriptCopyBtn } from "@/components/magicui/script-copy-btn";
 import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
 import { useState } from "react";
+import { Copy } from "lucide-react";
 
 export default function MailerPage() {
+
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
-
-  const copyToClipboard = (code: string, id: string) => {
-    navigator.clipboard.writeText(code);
-    setCopiedCode(id);
-    setTimeout(() => setCopiedCode(null), 2000);
-  };
-
-  const installCommand = `npx shadcn@latest add "https://supreme.jashagrawal.in/r/mailer-module.json"`;
+  
+     const copyToClipboard = (text: string, codeName: string) => {
+      navigator.clipboard.writeText(text);
+      setCopiedCode(codeName);
+      setTimeout(() => {
+        setCopiedCode(null);
+      }, 1000);
+    };
 
   return (
     <div className="space-y-6">
@@ -91,19 +93,16 @@ export default function MailerPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            <div className="relative">
-              <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <code>{installCommand}</code>
-              </pre>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="absolute top-2 right-2"
-                onClick={() => copyToClipboard(installCommand, 'install')}
-              >
-                {copiedCode === 'install' ? '✓' : <Copy className="h-4 w-4" />}
-              </Button>
-            </div>
+            <ScriptCopyBtn
+              codeLanguage="bash"
+              lightTheme="github-light"
+              darkTheme="github-dark"
+              commandMap={{
+                npm: "npx shadcn@latest add \"https://supremetoolkit.in/r/mailer-module\"",
+                yarn: "yarn dlx shadcn@latest add \"https://supremetoolkit.in/r/mailer-module\"",
+                pnpm: "pnpm dlx shadcn@latest add \"https://supremetoolkit.in/r/mailer-module\""
+              }}
+            />
             <div className="text-sm text-muted-foreground">
               <p className="font-medium mb-2">This installs:</p>
               <ul className="space-y-1 ml-4">
@@ -116,6 +115,122 @@ export default function MailerPage() {
                 <li>• Required dependencies (resend, nodemailer, @react-email/components)</li>
               </ul>
             </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Environment Variables */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            🔧 Environment Variables
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
+              <h4 className="font-medium mb-2 text-blue-800 dark:text-blue-200">
+                Choose Your Email Provider
+              </h4>
+              <p className="text-sm text-blue-700 dark:text-blue-300">
+                The mailer module automatically detects which provider to use based on your environment variables.
+                Configure one of the options below:
+              </p>
+            </div>
+
+            <Tabs defaultValue="resend" className="space-y-4">
+              <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger value="resend">Resend (Recommended)</TabsTrigger>
+                <TabsTrigger value="smtp">SMTP</TabsTrigger>
+                <TabsTrigger value="gmail">Gmail</TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="resend" className="space-y-4">
+                <div>
+                  <h4 className="font-medium mb-2">1. Get Resend API Key:</h4>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    Sign up at <a href="https://resend.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">resend.com</a> and create an API key
+                  </p>
+                  <div className="relative">
+                    <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
+                      <code>{`# .env.local
+RESEND_API_KEY=re_your_api_key_here`}</code>
+                    </pre>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="absolute top-2 right-2"
+                      onClick={() => copyToClipboard(`# .env.local
+RESEND_API_KEY=re_your_api_key_here`, 'resend-env')}
+                    >
+                      {copiedCode === 'resend-env' ? '✓' : <Copy className="h-4 w-4" />}
+                    </Button>
+                  </div>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="smtp" className="space-y-4">
+                <div>
+                  <h4 className="font-medium mb-2">SMTP Configuration:</h4>
+                  <div className="relative">
+                    <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
+                      <code>{`# .env.local
+EMAIL_PROVIDER=smtp
+SMTP_HOST=smtp.your-provider.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your-email@domain.com
+SMTP_PASSWORD=your-password
+SMTP_REJECT_UNAUTHORIZED=true`}</code>
+                    </pre>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="absolute top-2 right-2"
+                      onClick={() => copyToClipboard(`# .env.local
+EMAIL_PROVIDER=smtp
+SMTP_HOST=smtp.your-provider.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your-email@domain.com
+SMTP_PASSWORD=your-password
+SMTP_REJECT_UNAUTHORIZED=true`, 'smtp-env')}
+                    >
+                      {copiedCode === 'smtp-env' ? '✓' : <Copy className="h-4 w-4" />}
+                    </Button>
+                  </div>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="gmail" className="space-y-4">
+                <div>
+                  <h4 className="font-medium mb-2">1. Enable 2-Factor Authentication on Gmail</h4>
+                  <h4 className="font-medium mb-2">2. Generate App Password:</h4>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    Go to Google Account settings → Security → App passwords and create a new app password
+                  </p>
+                  <div className="relative">
+                    <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
+                      <code>{`# .env.local
+EMAIL_PROVIDER=gmail
+GMAIL_USER=your-email@gmail.com
+GMAIL_APP_PASSWORD=your-16-character-app-password`}</code>
+                    </pre>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="absolute top-2 right-2"
+                      onClick={() => copyToClipboard(`# .env.local
+EMAIL_PROVIDER=gmail
+GMAIL_USER=your-email@gmail.com
+GMAIL_APP_PASSWORD=your-16-character-app-password`, 'gmail-env')}
+                    >
+                      {copiedCode === 'gmail-env' ? '✓' : <Copy className="h-4 w-4" />}
+                    </Button>
+                  </div>
+                </div>
+              </TabsContent>
+            </Tabs>
           </div>
         </CardContent>
       </Card>

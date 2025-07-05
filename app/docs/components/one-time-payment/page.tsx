@@ -3,20 +3,21 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { ScriptCopyBtn } from "@/components/magicui/script-copy-btn";
 import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
 import { useState } from "react";
+import { Copy } from "lucide-react";
 
 export default function OneTimePaymentPage() {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
-  const copyToClipboard = (code: string, id: string) => {
-    navigator.clipboard.writeText(code);
-    setCopiedCode(id);
-    setTimeout(() => setCopiedCode(null), 2000);
+   const copyToClipboard = (text: string, codeName: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedCode(codeName);
+    setTimeout(() => {
+      setCopiedCode(null);
+    }, 1000);
   };
-
-  const installCommand = `npx shadcn@latest add "https://supreme.jashagrawal.in/r/one-time-payment.json"`;
 
   return (
     <div className="space-y-6">
@@ -91,19 +92,16 @@ export default function OneTimePaymentPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            <div className="relative">
-              <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <code>{installCommand}</code>
-              </pre>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="absolute top-2 right-2"
-                onClick={() => copyToClipboard(installCommand, 'install')}
-              >
-                {copiedCode === 'install' ? '✓' : <Copy className="h-4 w-4" />}
-              </Button>
-            </div>
+            <ScriptCopyBtn
+              codeLanguage="bash"
+              lightTheme="github-light"
+              darkTheme="github-dark"
+              commandMap={{
+                npm: "npx shadcn@latest add \"https://supremetoolkit.in/r/one-time-payment\"",
+                yarn: "yarn dlx shadcn@latest add \"https://supremetoolkit.in/r/one-time-payment\"",
+                pnpm: "pnpm dlx shadcn@latest add \"https://supremetoolkit.in/r/one-time-payment\""
+              }}
+            />
             <div className="text-sm text-muted-foreground">
               <p className="font-medium mb-2">This installs:</p>
               <ul className="space-y-1 ml-4">
@@ -115,6 +113,125 @@ export default function OneTimePaymentPage() {
                 <li>• Secure webhook signature validation</li>
                 <li>• Required dependencies (stripe, @stripe/stripe-js)</li>
               </ul>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Environment Variables */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            🔧 Environment Variables & Setup
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
+              <h4 className="font-medium mb-2 text-blue-800 dark:text-blue-200">
+                Stripe Account Required
+              </h4>
+              <p className="text-sm text-blue-700 dark:text-blue-300">
+                You need a Stripe account to use this module. Sign up at{' '}
+                <a href="https://stripe.com" target="_blank" rel="noopener noreferrer" className="underline">
+                  stripe.com
+                </a>{' '}
+                and get your API keys from the dashboard.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">1. Add Stripe API Keys:</h4>
+              <div className="relative">
+                <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
+                  <code>{`# .env.local
+# Required - Get these from your Stripe Dashboard
+STRIPE_SECRET_KEY=sk_test_your_secret_key_here
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_your_publishable_key_here
+
+# Optional - For webhook signature verification (recommended for production)
+STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret_here`}</code>
+                </pre>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="absolute top-2 right-2"
+                  onClick={() => copyToClipboard(`# .env.local
+# Required - Get these from your Stripe Dashboard
+STRIPE_SECRET_KEY=sk_test_your_secret_key_here
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_your_publishable_key_here
+
+# Optional - For webhook signature verification (recommended for production)
+STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret_here`, 'stripe-env')}
+                >
+                  {copiedCode === 'stripe-env' ? '✓' : <Copy className="h-4 w-4" />}
+                </Button>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">2. Configure Stripe in config.tsx:</h4>
+              <div className="relative">
+                <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
+                  <code>{`export const toolkitConfig: ToolkitConfig = {
+  stripe: {
+    apiKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
+    productIds: ['prod_your_product_id'], // Replace with your Stripe product IDs
+    successUrl: '/payment/success',
+    cancelUrl: '/payment/cancel',
+    webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
+  },
+  // ... other config
+};`}</code>
+                </pre>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="absolute top-2 right-2"
+                  onClick={() => copyToClipboard(`export const toolkitConfig: ToolkitConfig = {
+  stripe: {
+    apiKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
+    productIds: ['prod_your_product_id'], // Replace with your Stripe product IDs
+    successUrl: '/payment/success',
+    cancelUrl: '/payment/cancel',
+    webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
+  },
+  // ... other config
+};`, 'stripe-config')}
+                >
+                  {copiedCode === 'stripe-config' ? '✓' : <Copy className="h-4 w-4" />}
+                </Button>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">3. Create Products in Stripe Dashboard:</h4>
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <p>• Go to your Stripe Dashboard → Products</p>
+                <p>• Create a new product with pricing</p>
+                <p>• Copy the product ID (starts with 'prod_')</p>
+                <p>• Add the product ID to your config.tsx file</p>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">4. Set up Webhooks (Optional but Recommended):</h4>
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <p>• Go to Stripe Dashboard → Webhooks</p>
+                <p>• Add endpoint: <code className="bg-muted px-1 rounded">https://yourdomain.com/api/stripe/webhooks</code></p>
+                <p>• Select events: <code className="bg-muted px-1 rounded">payment_intent.succeeded</code>, <code className="bg-muted px-1 rounded">payment_intent.payment_failed</code></p>
+                <p>• Copy the webhook signing secret to your .env.local file</p>
+              </div>
+            </div>
+
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4">
+              <h4 className="font-medium mb-2 text-yellow-800 dark:text-yellow-200">
+                Test vs Production
+              </h4>
+              <p className="text-sm text-yellow-700 dark:text-yellow-300">
+                Use test keys (sk_test_... and pk_test_...) during development.
+                Switch to live keys (sk_live_... and pk_live_...) only when ready for production.
+              </p>
             </div>
           </div>
         </CardContent>

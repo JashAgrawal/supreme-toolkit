@@ -145,6 +145,107 @@ export default function DocsPage() {
             </div>
             <Badge>Ready</Badge>
           </div>
+
+          {/* Coming Soon Modules */}
+          <div className="flex items-center justify-between rounded-lg border p-4 opacity-75">
+            <div className="space-y-1">
+              <h3 className="font-medium">💬 Realtime Chat</h3>
+              <p className="text-sm text-muted-foreground">
+                Realtime chat system with Supabase or Pusher backend
+              </p>
+            </div>
+            <Badge variant="secondary">Coming Soon</Badge>
+          </div>
+
+          <div className="flex items-center justify-between rounded-lg border p-4 opacity-75">
+            <div className="space-y-1">
+              <h3 className="font-medium">🤖 GPT Chatbot</h3>
+              <p className="text-sm text-muted-foreground">
+                AI chatbot widget with OpenAI integration and backend logic
+              </p>
+            </div>
+            <Badge variant="secondary">Coming Soon</Badge>
+          </div>
+
+          <div className="flex items-center justify-between rounded-lg border p-4 opacity-75">
+            <div className="space-y-1">
+              <h3 className="font-medium">🎫 Support Tickets</h3>
+              <p className="text-sm text-muted-foreground">
+                End-to-end ticketing interface with API and management system
+              </p>
+            </div>
+            <Badge variant="secondary">Coming Soon</Badge>
+          </div>
+
+          <div className="flex items-center justify-between rounded-lg border p-4 opacity-75">
+            <div className="space-y-1">
+              <h3 className="font-medium">🔗 Webhook Handler</h3>
+              <p className="text-sm text-muted-foreground">
+                Generic webhook endpoint with logger UI and event processing
+              </p>
+            </div>
+            <Badge variant="secondary">Coming Soon</Badge>
+          </div>
+
+          <div className="flex items-center justify-between rounded-lg border p-4 opacity-75">
+            <div className="space-y-1">
+              <h3 className="font-medium">📰 Newsletter Subscription</h3>
+              <p className="text-sm text-muted-foreground">
+                Email capture with MailerLite/Postmark integration and automation
+              </p>
+            </div>
+            <Badge variant="secondary">Coming Soon</Badge>
+          </div>
+
+          <div className="flex items-center justify-between rounded-lg border p-4 opacity-75">
+            <div className="space-y-1">
+              <h3 className="font-medium">💭 Feedback Widget</h3>
+              <p className="text-sm text-muted-foreground">
+                User feedback form with webhook/email integration and analytics
+              </p>
+            </div>
+            <Badge variant="secondary">Coming Soon</Badge>
+          </div>
+
+          <div className="flex items-center justify-between rounded-lg border p-4 opacity-75">
+            <div className="space-y-1">
+              <h3 className="font-medium">🖼️ Image Uploader</h3>
+              <p className="text-sm text-muted-foreground">
+                Drag/drop image uploader with Cloudinary/S3 backend integration
+              </p>
+            </div>
+            <Badge variant="secondary">Coming Soon</Badge>
+          </div>
+
+          <div className="flex items-center justify-between rounded-lg border p-4 opacity-75">
+            <div className="space-y-1">
+              <h3 className="font-medium">📊 Analytics Snippet</h3>
+              <p className="text-sm text-muted-foreground">
+                Drop-in analytics with server and client-side event logging
+              </p>
+            </div>
+            <Badge variant="secondary">Coming Soon</Badge>
+          </div>
+
+          <div className="flex items-center justify-between rounded-lg border p-4 opacity-75">
+            <div className="space-y-1">
+              <h3 className="font-medium">✍️ Rich Text Editor</h3>
+              <p className="text-sm text-muted-foreground">
+                Notion-like rich text editor powered by Tiptap with collaborative features
+              </p>
+            </div>
+            <Badge variant="secondary">Coming Soon</Badge>
+          </div>
+
+          <div className="flex items-center justify-between rounded-lg border p-4 opacity-75">
+            <div className="space-y-1">
+              <h3 className="font-medium">🔍 Webhook Logger</h3>
+              <p className="text-sm text-muted-foreground">
+                Log and inspect third-party webhooks with debugging interface
+              </p>
+            </div>
+            <Badge variant="secondary">Coming Soon</Badge>
+          </div>
         </div>
       </div>
 

@@ -3,21 +3,21 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { ScriptCopyBtn } from "@/components/magicui/script-copy-btn";
 import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
 import { useState } from "react";
+import { Copy } from "lucide-react";
 
 export default function AuthenticationPage() {
-  const [copiedCode, setCopiedCode] = useState<string | null>(null);
+const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
-  const copyToClipboard = (code: string, id: string) => {
-    navigator.clipboard.writeText(code);
-    setCopiedCode(id);
-    setTimeout(() => setCopiedCode(null), 2000);
+   const copyToClipboard = (text: string, codeName: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedCode(codeName);
+    setTimeout(() => {
+      setCopiedCode(null);
+    }, 1000);
   };
-
-  const installCommand = `npx shadcn@latest add "https://supreme.jashagrawal.in/r/auth-module.json"`;
-
   return (
     <div className="space-y-6">
       <div>
@@ -91,53 +91,36 @@ export default function AuthenticationPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            <div className="relative">
-              <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <code>{installCommand}</code>
-              </pre>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="absolute top-2 right-2"
-                onClick={() => copyToClipboard(installCommand, 'install')}
-              >
-                {copiedCode === 'install' ? '✓' : <Copy className="h-4 w-4" />}
-              </Button>
-              
+            <ScriptCopyBtn
+              codeLanguage="bash"
+              lightTheme="github-light"
+              darkTheme="github-dark"
+              commandMap={{
+                npm: "npx shadcn@latest add \"https://supremetoolkit.in/r/auth-module\"",
+                yarn: "yarn dlx shadcn@latest add \"https://supremetoolkit.in/r/auth-module\"",
+                pnpm: "pnpm dlx shadcn@latest add \"https://supremetoolkit.in/r/auth-module\""
+              }}
+            />
 
-            </div>
+            <ScriptCopyBtn
+              codeLanguage="bash"
+              lightTheme="github-light"
+              darkTheme="github-dark"
+              showMultiplePackageOptions={false}
+              commandMap={{
+                cli: "npx @better-auth/cli@latest generate"
+              }}
+            />
 
-             <div className="relative">
-              <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <code>{"npx @better-auth/cli@latest generate"}</code>
-              </pre>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="absolute top-2 right-2"
-                onClick={() => copyToClipboard("npx @better-auth/cli@latest generate", 'install')}
-              >
-                {copiedCode === 'install' ? '✓' : <Copy className="h-4 w-4" />}
-              </Button>
-              
-
-            </div>
-
-             <div className="relative">
-              <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <code>{"npx @better-auth/cli@latest migrate"}</code>
-              </pre>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="absolute top-2 right-2"
-                onClick={() => copyToClipboard("npx @better-auth/cli@latest migrate", 'install')}
-              >
-                {copiedCode === 'install' ? '✓' : <Copy className="h-4 w-4" />}
-              </Button>
-              
-
-            </div>
+            <ScriptCopyBtn
+              codeLanguage="bash"
+              lightTheme="github-light"
+              darkTheme="github-dark"
+              showMultiplePackageOptions={false}
+              commandMap={{
+                cli: "npx @better-auth/cli@latest migrate"
+              }}
+            />
             <div className="text-sm text-muted-foreground">
               <p className="font-medium mb-2">This installs:</p>
               <ul className="space-y-1 ml-4">

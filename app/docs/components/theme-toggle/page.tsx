@@ -4,20 +4,22 @@ import { ThemeToggleDropdown } from "@/components/ui/theme-toggle-dropdown";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScriptCopyBtn } from "@/components/magicui/script-copy-btn";
 import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
 import { useState } from "react";
+import { Copy } from "lucide-react";
 
 export default function ThemeTogglePage() {
+
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
-
-  const copyToClipboard = (code: string, id: string) => {
-    navigator.clipboard.writeText(code);
-    setCopiedCode(id);
-    setTimeout(() => setCopiedCode(null), 2000);
-  };
-
-  const installCommand = `npx shadcn@latest add "https://supreme.jashagrawal.in/r/theme-toggle.json"`;
+  
+     const copyToClipboard = (text: string, codeName: string) => {
+      navigator.clipboard.writeText(text);
+      setCopiedCode(codeName);
+      setTimeout(() => {
+        setCopiedCode(null);
+      }, 1000);
+    };
 
   return (
     <div className="space-y-6">
@@ -78,19 +80,16 @@ export default function ThemeTogglePage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            <div className="relative">
-              <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <code>{installCommand}</code>
-              </pre>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="absolute top-2 right-2"
-                onClick={() => copyToClipboard(installCommand, 'install')}
-              >
-                {copiedCode === 'install' ? '✓' : <Copy className="h-4 w-4" />}
-              </Button>
-            </div>
+            <ScriptCopyBtn
+              codeLanguage="bash"
+              lightTheme="github-light"
+              darkTheme="github-dark"
+              commandMap={{
+                npm: "npx shadcn@latest add \"https://supremetoolkit.in/r/theme-toggle\"",
+                yarn: "yarn dlx shadcn@latest add \"https://supremetoolkit.in/r/theme-toggle\"",
+                pnpm: "pnpm dlx shadcn@latest add \"https://supremetoolkit.in/r/theme-toggle\""
+              }}
+            />
             <div className="text-sm text-muted-foreground">
               <p className="font-medium mb-2">This installs:</p>
               <ul className="space-y-1 ml-4">
@@ -100,6 +99,180 @@ export default function ThemeTogglePage() {
                 <li>• Complete theme configuration and CSS variables</li>
                 <li>• Required dependencies (next-themes)</li>
               </ul>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Setup Instructions */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            🔧 Setup Instructions
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
+              <h4 className="font-medium mb-2 text-green-800 dark:text-green-200">
+                No Environment Variables Required
+              </h4>
+              <p className="text-sm text-green-700 dark:text-green-300">
+                The theme toggle module works out of the box with no additional configuration needed.
+                Just install and add to your layout!
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">1. Add ThemeProvider to your layout:</h4>
+              <div className="relative">
+                <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
+                  <code>{`// app/layout.tsx
+import { ThemeProvider } from '@/components/theme-provider';
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}`}</code>
+                </pre>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="absolute top-2 right-2"
+                  onClick={() => copyToClipboard(`// app/layout.tsx
+import { ThemeProvider } from '@/components/theme-provider';
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}`, 'layout-setup')}
+                >
+                  {copiedCode === 'layout-setup' ? '✓' : <Copy className="h-4 w-4" />}
+                </Button>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">2. Add theme toggle to your navigation:</h4>
+              <div className="relative">
+                <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
+                  <code>{`// components/navigation.tsx
+import { ThemeToggleDropdown } from '@/components/ui/theme-toggle-dropdown';
+// or
+import { ThemeToggle } from '@/components/ui/theme-toggle';
+
+export function Navigation() {
+  return (
+    <nav className="flex items-center justify-between p-4">
+      <div>Your Logo</div>
+      <div className="flex items-center space-x-4">
+        <ThemeToggleDropdown />
+        {/* or <ThemeToggle /> for simple toggle */}
+      </div>
+    </nav>
+  );
+}`}</code>
+                </pre>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="absolute top-2 right-2"
+                  onClick={() => copyToClipboard(`// components/navigation.tsx
+import { ThemeToggleDropdown } from '@/components/ui/theme-toggle-dropdown';
+// or
+import { ThemeToggle } from '@/components/ui/theme-toggle';
+
+export function Navigation() {
+  return (
+    <nav className="flex items-center justify-between p-4">
+      <div>Your Logo</div>
+      <div className="flex items-center space-x-4">
+        <ThemeToggleDropdown />
+        {/* or <ThemeToggle /> for simple toggle */}
+      </div>
+    </nav>
+  );
+}`, 'nav-setup')}
+                >
+                  {copiedCode === 'nav-setup' ? '✓' : <Copy className="h-4 w-4" />}
+                </Button>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">3. Ensure your CSS supports dark mode:</h4>
+              <p className="text-sm text-muted-foreground mb-3">
+                Make sure your global CSS includes dark mode variables. If using shadcn/ui, this is already configured.
+              </p>
+              <div className="relative">
+                <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
+                  <code>{`/* globals.css */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  /* ... other light theme variables */
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  /* ... other dark theme variables */
+}`}</code>
+                </pre>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="absolute top-2 right-2"
+                  onClick={() => copyToClipboard(`/* globals.css */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  /* ... other light theme variables */
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  /* ... other dark theme variables */
+}`, 'css-setup')}
+                >
+                  {copiedCode === 'css-setup' ? '✓' : <Copy className="h-4 w-4" />}
+                </Button>
+              </div>
+            </div>
+
+            <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
+              <h4 className="font-medium mb-2 text-blue-800 dark:text-blue-200">
+                Important: suppressHydrationWarning
+              </h4>
+              <p className="text-sm text-blue-700 dark:text-blue-300">
+                Always add <code className="bg-muted px-1 rounded">suppressHydrationWarning</code> to your html element
+                to prevent hydration warnings when the theme is determined client-side.
+              </p>
             </div>
           </div>
         </CardContent>

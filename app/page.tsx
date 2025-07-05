@@ -4,13 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ThemeToggleDropdown } from "@/components/ui/theme-toggle-dropdown";
+import { Footer } from "@/components/footer";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-black">
-
- <header className="sticky top-0 z-50 w-full border-b bg-black backdrop-blur supports-[backdrop-filter]:bg-background/60">
-            <div className="flex h-14 items-center gap-4 px-4">
+      <header className="sticky top-0 z-50 w-full border-b bg-black backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="flex h-14 items-center gap-4 px-4">
               <div className="flex flex-1 items-center justify-between">
                 <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
                   <Link href="/" className="transition-colors hover:text-foreground/80 text-foreground/60 font-extrabold text-xl">
@@ -333,6 +333,290 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Coming Soon Modules */}
+        <div className="mb-20">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              🚀 Coming Soon Modules
+            </h3>
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              More powerful modules in development - stay tuned!
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            {/* Realtime Chat */}
+            <Card className="hover:shadow-lg transition-shadow opacity-75">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2">
+                    💬 Realtime Chat
+                  </CardTitle>
+                  <Badge variant="secondary">Coming Soon</Badge>
+                </div>
+                <CardDescription>
+                  Realtime chat system with Supabase or Pusher backend
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs">Realtime</Badge>
+                    <Badge variant="outline" className="text-xs">Supabase</Badge>
+                    <Badge variant="outline" className="text-xs">Pusher</Badge>
+                  </div>
+                  <div className="text-xs text-muted-foreground bg-gray-100 dark:bg-gray-800 p-2 rounded">
+                    Full-featured chat with typing indicators, message history, and user presence
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* GPT Chatbot */}
+            <Card className="hover:shadow-lg transition-shadow opacity-75">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2">
+                    🤖 GPT Chatbot
+                  </CardTitle>
+                  <Badge variant="secondary">Coming Soon</Badge>
+                </div>
+                <CardDescription>
+                  AI chatbot widget with OpenAI integration and backend logic
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs">OpenAI</Badge>
+                    <Badge variant="outline" className="text-xs">Widget</Badge>
+                    <Badge variant="outline" className="text-xs">Streaming</Badge>
+                  </div>
+                  <div className="text-xs text-muted-foreground bg-gray-100 dark:bg-gray-800 p-2 rounded">
+                    Embeddable AI assistant with conversation history and custom prompts
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Support Tickets */}
+            <Card className="hover:shadow-lg transition-shadow opacity-75">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2">
+                    🎫 Support Tickets
+                  </CardTitle>
+                  <Badge variant="secondary">Coming Soon</Badge>
+                </div>
+                <CardDescription>
+                  End-to-end ticketing interface with API and management system
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs">Ticketing</Badge>
+                    <Badge variant="outline" className="text-xs">Management</Badge>
+                    <Badge variant="outline" className="text-xs">API</Badge>
+                  </div>
+                  <div className="text-xs text-muted-foreground bg-gray-100 dark:bg-gray-800 p-2 rounded">
+                    Complete support system with ticket creation, assignment, and tracking
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Webhook Handler */}
+            <Card className="hover:shadow-lg transition-shadow opacity-75">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2">
+                    🔗 Webhook Handler
+                  </CardTitle>
+                  <Badge variant="secondary">Coming Soon</Badge>
+                </div>
+                <CardDescription>
+                  Generic webhook endpoint with logger UI and event processing
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs">Webhooks</Badge>
+                    <Badge variant="outline" className="text-xs">Logger</Badge>
+                    <Badge variant="outline" className="text-xs">Events</Badge>
+                  </div>
+                  <div className="text-xs text-muted-foreground bg-gray-100 dark:bg-gray-800 p-2 rounded">
+                    Receive, log, and process webhooks from any third-party service
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Newsletter Subscription */}
+            <Card className="hover:shadow-lg transition-shadow opacity-75">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2">
+                    📰 Newsletter
+                  </CardTitle>
+                  <Badge variant="secondary">Coming Soon</Badge>
+                </div>
+                <CardDescription>
+                  Email capture with MailerLite/Postmark integration and automation
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs">MailerLite</Badge>
+                    <Badge variant="outline" className="text-xs">Postmark</Badge>
+                    <Badge variant="outline" className="text-xs">Automation</Badge>
+                  </div>
+                  <div className="text-xs text-muted-foreground bg-gray-100 dark:bg-gray-800 p-2 rounded">
+                    Newsletter signup with automated email sequences and analytics
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Feedback Widget */}
+            <Card className="hover:shadow-lg transition-shadow opacity-75">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2">
+                    💭 Feedback Widget
+                  </CardTitle>
+                  <Badge variant="secondary">Coming Soon</Badge>
+                </div>
+                <CardDescription>
+                  User feedback form with webhook/email integration and analytics
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs">Feedback</Badge>
+                    <Badge variant="outline" className="text-xs">Analytics</Badge>
+                    <Badge variant="outline" className="text-xs">Widget</Badge>
+                  </div>
+                  <div className="text-xs text-muted-foreground bg-gray-100 dark:bg-gray-800 p-2 rounded">
+                    Collect user feedback with customizable forms and reporting
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Image Uploader */}
+            <Card className="hover:shadow-lg transition-shadow opacity-75">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2">
+                    🖼️ Image Uploader
+                  </CardTitle>
+                  <Badge variant="secondary">Coming Soon</Badge>
+                </div>
+                <CardDescription>
+                  Drag/drop image uploader with Cloudinary/S3 backend integration
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs">Cloudinary</Badge>
+                    <Badge variant="outline" className="text-xs">S3</Badge>
+                    <Badge variant="outline" className="text-xs">Drag & Drop</Badge>
+                  </div>
+                  <div className="text-xs text-muted-foreground bg-gray-100 dark:bg-gray-800 p-2 rounded">
+                    Upload images with progress indicators, validation, and cloud storage
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Analytics Snippet */}
+            <Card className="hover:shadow-lg transition-shadow opacity-75">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2">
+                    📊 Analytics
+                  </CardTitle>
+                  <Badge variant="secondary">Coming Soon</Badge>
+                </div>
+                <CardDescription>
+                  Drop-in analytics with server and client-side event logging
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs">Events</Badge>
+                    <Badge variant="outline" className="text-xs">Tracking</Badge>
+                    <Badge variant="outline" className="text-xs">Dashboard</Badge>
+                  </div>
+                  <div className="text-xs text-muted-foreground bg-gray-100 dark:bg-gray-800 p-2 rounded">
+                    Custom analytics solution with event tracking and reporting
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Rich Text Editor */}
+            <Card className="hover:shadow-lg transition-shadow opacity-75">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2">
+                    ✍️ Rich Text Editor
+                  </CardTitle>
+                  <Badge variant="secondary">Coming Soon</Badge>
+                </div>
+                <CardDescription>
+                  Notion-like rich text editor powered by Tiptap with collaborative features
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs">Tiptap</Badge>
+                    <Badge variant="outline" className="text-xs">Collaborative</Badge>
+                    <Badge variant="outline" className="text-xs">Rich Text</Badge>
+                  </div>
+                  <div className="text-xs text-muted-foreground bg-gray-100 dark:bg-gray-800 p-2 rounded">
+                    Advanced text editor with formatting, collaboration, and export features
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Webhook Logger */}
+            <Card className="hover:shadow-lg transition-shadow opacity-75">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2">
+                    🔍 Webhook Logger
+                  </CardTitle>
+                  <Badge variant="secondary">Coming Soon</Badge>
+                </div>
+                <CardDescription>
+                  Log and inspect third-party webhooks with debugging interface
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs">Logging</Badge>
+                    <Badge variant="outline" className="text-xs">Debug</Badge>
+                    <Badge variant="outline" className="text-xs">Inspect</Badge>
+                  </div>
+                  <div className="text-xs text-muted-foreground bg-gray-100 dark:bg-gray-800 p-2 rounded">
+                    Debug webhook payloads with detailed logging and inspection tools
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
           {/* Live Demo Section */}
           <div className="grid md:grid-cols-2 gap-8 items-start">
             <div className="space-y-6">
@@ -424,6 +708,18 @@ export default function Page() {
               <div className="bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 px-6 py-3 rounded-lg font-medium">
                 💬 Chat Module (Coming Soon)
               </div>
+              <div className="bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 px-6 py-3 rounded-lg font-medium">
+                🤖 GPT Chatbot (Coming Soon)
+              </div>
+              <div className="bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 px-6 py-3 rounded-lg font-medium">
+                🎫 Support Tickets (Coming Soon)
+              </div>
+              <div className="bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 px-6 py-3 rounded-lg font-medium">
+                🖼️ Image Uploader (Coming Soon)
+              </div>
+              <div className="bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 px-6 py-3 rounded-lg font-medium">
+                ✍️ Rich Text Editor (Coming Soon)
+              </div>
             </div>
           </div>
 
@@ -485,7 +781,9 @@ export default function Page() {
             </Card>
           </div>
         </div>
-      </div>
-    // </div>
+      {/* </div> */}
+
+      <Footer />
+    </div>
   );
 }
