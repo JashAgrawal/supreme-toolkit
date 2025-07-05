@@ -783,7 +783,7 @@ export default function Page() {
                       🚀 Get Started Now
                     </Link>
                   </Button>
-                  <Button size="lg" variant="outline" asChild className="text-lg px-8 py-6 border-white text-white hover:bg-white hover:text-blue-600">
+                  <Button size="lg" variant="outline" asChild className="text-lg text-black dark:text-white px-8 py-6 border-white hover:bg-white hover:text-blue-600">
                     <Link href="/docs">
                       📚 Read Documentation
                     </Link>
