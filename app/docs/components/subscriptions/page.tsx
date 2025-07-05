@@ -16,7 +16,7 @@ export default function SubscriptionsPage() {
     setTimeout(() => setCopiedCode(null), 2000);
   };
 
-  const installCommand = `npx shadcn@latest add "https://supremetoolkit.in/r/subscriptions"`;
+  const installCommand = `npx shadcn@latest add "https://supreme.jashagrawal.in/r/subscriptions"`;
 
   return (
     <div className="space-y-6">

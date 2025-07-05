@@ -17,7 +17,7 @@ export default function ThemeTogglePage() {
     setTimeout(() => setCopiedCode(null), 2000);
   };
 
-  const installCommand = `npx shadcn@latest add "https://supremetoolkit.in/r/theme-toggle"`;
+  const installCommand = `npx shadcn@latest add "https://supreme.jashagrawal.in/r/theme-toggle"`;
 
   return (
     <div className="space-y-6">

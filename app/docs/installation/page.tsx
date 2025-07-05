@@ -88,9 +88,9 @@ export default function InstallationDocsPage() {
               lightTheme="github-light"
               darkTheme="github-dark"
               commandMap={{
-                npm: "npx shadcn@latest add \"https://supremetoolkit.in/r/config-module\"",
-                yarn: "yarn dlx shadcn@latest add \"https://supremetoolkit.in/r/config-module\"",
-                pnpm: "pnpm dlx shadcn@latest add \"https://supremetoolkit.in/r/config-module\""
+                npm: "npx shadcn@latest add \"https://supreme.jashagrawal.in/r/config-module\"",
+                yarn: "yarn dlx shadcn@latest add \"https://supreme.jashagrawal.in/r/config-module\"",
+                pnpm: "pnpm dlx shadcn@latest add \"https://supreme.jashagrawal.in/r/config-module\""
               }}
             />
           </div>
@@ -124,9 +124,9 @@ export default function InstallationDocsPage() {
                 lightTheme="github-light"
                 darkTheme="github-dark"
                 commandMap={{
-                  npm: "npx shadcn@latest add \"https://supremetoolkit.in/r/auth-module\"",
-                  yarn: "yarn dlx shadcn@latest add \"https://supremetoolkit.in/r/auth-module\"",
-                  pnpm: "pnpm dlx shadcn@latest add \"https://supremetoolkit.in/r/auth-module\""
+                  npm: "npx shadcn@latest add \"https://supreme.jashagrawal.in/r/auth-module\"",
+                  yarn: "yarn dlx shadcn@latest add \"https://supreme.jashagrawal.in/r/auth-module\"",
+                  pnpm: "pnpm dlx shadcn@latest add \"https://supreme.jashagrawal.in/r/auth-module\""
                 }}
               />
             </CardContent>
@@ -150,9 +150,9 @@ export default function InstallationDocsPage() {
                 lightTheme="github-light"
                 darkTheme="github-dark"
                 commandMap={{
-                  npm: "npx shadcn@latest add \"https://supremetoolkit.in/r/theme-toggle\"",
-                  yarn: "yarn dlx shadcn@latest add \"https://supremetoolkit.in/r/theme-toggle\"",
-                  pnpm: "pnpm dlx shadcn@latest add \"https://supremetoolkit.in/r/theme-toggle\""
+                  npm: "npx shadcn@latest add \"https://supreme.jashagrawal.in/r/theme-toggle\"",
+                  yarn: "yarn dlx shadcn@latest add \"https://supreme.jashagrawal.in/r/theme-toggle\"",
+                  pnpm: "pnpm dlx shadcn@latest add \"https://supreme.jashagrawal.in/r/theme-toggle\""
                 }}
               />
             </CardContent>
@@ -176,9 +176,9 @@ export default function InstallationDocsPage() {
                 lightTheme="github-light"
                 darkTheme="github-dark"
                 commandMap={{
-                  npm: "npx shadcn@latest add \"https://supremetoolkit.in/r/waitlist-module\"",
-                  yarn: "yarn dlx shadcn@latest add \"https://supremetoolkit.in/r/waitlist-module\"",
-                  pnpm: "pnpm dlx shadcn@latest add \"https://supremetoolkit.in/r/waitlist-module\""
+                  npm: "npx shadcn@latest add \"https://supreme.jashagrawal.in/r/waitlist-module\"",
+                  yarn: "yarn dlx shadcn@latest add \"https://supreme.jashagrawal.in/r/waitlist-module\"",
+                  pnpm: "pnpm dlx shadcn@latest add \"https://supreme.jashagrawal.in/r/waitlist-module\""
                 }}
               />
             </CardContent>
@@ -202,9 +202,9 @@ export default function InstallationDocsPage() {
                 lightTheme="github-light"
                 darkTheme="github-dark"
                 commandMap={{
-                  npm: "npx shadcn@latest add \"https://supremetoolkit.in/r/mailer-module\"",
-                  yarn: "yarn dlx shadcn@latest add \"https://supremetoolkit.in/r/mailer-module\"",
-                  pnpm: "pnpm dlx shadcn@latest add \"https://supremetoolkit.in/r/mailer-module\""
+                  npm: "npx shadcn@latest add \"https://supreme.jashagrawal.in/r/mailer-module\"",
+                  yarn: "yarn dlx shadcn@latest add \"https://supreme.jashagrawal.in/r/mailer-module\"",
+                  pnpm: "pnpm dlx shadcn@latest add \"https://supreme.jashagrawal.in/r/mailer-module\""
                 }}
               />
             </CardContent>

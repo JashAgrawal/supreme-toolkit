@@ -15,7 +15,7 @@ export default function WaitlistPage() {
     setTimeout(() => setCopiedCode(null), 2000);
   };
 
-  const installCommand = `npx shadcn@latest add "https://supremetoolkit.in/r/waitlist-module"`;
+  const installCommand = `npx shadcn@latest add "https://supreme.jashagrawal.in/r/waitlist-module"`;
 
   return (
     <div className="space-y-6">

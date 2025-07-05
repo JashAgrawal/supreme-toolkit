@@ -15,7 +15,7 @@ A comprehensive dark mode solution with theme provider and multiple toggle varia
 ## 🚀 Installation
 
 ```bash
-npx shadcn@latest add "https://supremetoolkit.in/r/theme-toggle"
+npx shadcn@latest add "https://supreme.jashagrawal.in/r/theme-toggle"
 ```
 
 This installs:
@@ -119,7 +119,7 @@ export default function Navigation() {
 
 1. **Install the module:**
 ```bash
-npx shadcn@latest add "https://supremetoolkit.in/r/theme-toggle"
+npx shadcn@latest add "https://supreme.jashagrawal.in/r/theme-toggle"
 ```
 
 2. **Add provider to layout:**

@@ -16,7 +16,7 @@ export default function AuthenticationPage() {
     setTimeout(() => setCopiedCode(null), 2000);
   };
 
-  const installCommand = `npx shadcn@latest add "https://supremetoolkit.in/r/auth-module"`;
+  const installCommand = `npx shadcn@latest add "https://supreme.jashagrawal.in/r/auth-module"`;
 
   return (
     <div className="space-y-6">
