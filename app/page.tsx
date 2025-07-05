@@ -16,7 +16,7 @@ export default function Home() {
             <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
               <Link
                 href="/"
-                className="transition-colors hover:text-foreground/80 text-foreground font-extrabold text-xl hover:scale-105 transition-transform"
+                className="hover:text-foreground/80 text-foreground font-extrabold text-xl hover:scale-105 transition-transform"
               >
                 {"{</>}"}
               </Link>

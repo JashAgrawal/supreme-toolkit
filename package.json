@@ -20,6 +20,7 @@
     "@types/better-sqlite3": "^7.6.13",
     "@types/nodemailer": "^6.4.17",
     "@types/stripe": "^8.0.416",
+    "@vercel/analytics": "^1.5.0",
     "better-auth": "^1.2.12",
     "better-sqlite3": "^12.2.0",
     "class-variance-authority": "^0.7.1",
