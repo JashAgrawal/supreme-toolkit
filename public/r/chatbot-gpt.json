@@ -1,0 +1,58 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "chatbot-gpt",
+  "type": "registry:module",
+  "title": "OpenAI Chatbot Module",
+  "description": "A chatbot widget UI that connects to OpenAI's GPT models for conversational responses. Supports streaming.",
+  "dependencies": [
+    "openai",
+    "ai"
+  ],
+  "registryDependencies": [
+    "button",
+    "input",
+    "avatar",
+    "card",
+    "scroll-area"
+  ],
+  "files": [
+    {
+      "path": "registry/supremetoolkit/chatbot-gpt/components/ui/ChatbotWidget.tsx",
+      "target": "components/ui/chatbot-widget.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "registry/supremetoolkit/chatbot-gpt/hooks/useChatbot.ts",
+      "target": "hooks/use-chatbot.ts",
+      "type": "registry:hook"
+    },
+    {
+      "path": "registry/supremetoolkit/chatbot-gpt/actions/chatbot-actions.ts",
+      "target": "actions/chatbot-actions.ts",
+      "type": "registry:action"
+    },
+    {
+      "path": "registry/supremetoolkit/chatbot-gpt/api/chat-completion/route.ts",
+      "target": "app/api/chat-completion/route.ts",
+      "type": "registry:api"
+    },
+    {
+      "path": "registry/supremetoolkit/chatbot-gpt/lib/openai-stream.ts",
+      "target": "lib/openai-stream.ts",
+      "type": "registry:lib"
+    },
+    {
+      "path": "registry/supremetoolkit/chatbot-gpt/types/index.ts",
+      "target": "types/chatbot.ts",
+      "type": "registry:type"
+    },
+    {
+      "path": "registry/supremetoolkit/chatbot-gpt/README.md",
+      "target": "docs/modules/chatbot-gpt.md",
+      "type": "registry:doc"
+    }
+  ],
+  "meta": {
+    "moduleName": "chatbot-gpt"
+  }
+}

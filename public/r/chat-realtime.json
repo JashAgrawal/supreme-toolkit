@@ -1,0 +1,58 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "chat-realtime",
+  "type": "registry:module",
+  "title": "Realtime Chat Module",
+  "description": "A realtime chat system using Supabase for message broadcasting, presence, and persistence. Includes UI components, hooks, and server actions.",
+  "dependencies": [
+    "@supabase/supabase-js",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "input",
+    "avatar",
+    "card",
+    "scroll-area"
+  ],
+  "files": [
+    {
+      "path": "registry/supremetoolkit/chat-realtime/components/ui/ChatInterface.tsx",
+      "target": "components/ui/chat-interface.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "registry/supremetoolkit/chat-realtime/components/ui/MessageBubble.tsx",
+      "target": "components/ui/message-bubble.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "registry/supremetoolkit/chat-realtime/hooks/useChat.ts",
+      "target": "hooks/use-chat.ts",
+      "type": "registry:hook"
+    },
+    {
+      "path": "registry/supremetoolkit/chat-realtime/actions/chat-actions.ts",
+      "target": "actions/chat-actions.ts",
+      "type": "registry:action"
+    },
+    {
+      "path": "registry/supremetoolkit/chat-realtime/lib/chat-supabase.ts",
+      "target": "lib/chat-supabase.ts",
+      "type": "registry:lib"
+    },
+    {
+      "path": "registry/supremetoolkit/chat-realtime/types/index.ts",
+      "target": "types/chat.ts",
+      "type": "registry:type"
+    },
+    {
+      "path": "registry/supremetoolkit/chat-realtime/README.md",
+      "target": "docs/modules/chat-realtime.md",
+      "type": "registry:doc"
+    }
+  ],
+  "meta": {
+    "moduleName": "chat-realtime"
+  }
+}

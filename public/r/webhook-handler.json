@@ -1,0 +1,58 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "webhook-handler",
+  "type": "registry:module",
+  "title": "Generic Webhook Handler",
+  "description": "A generic webhook endpoint to receive data from various sources, with a logger UI to inspect payloads.",
+  "dependencies": [
+    "@supabase/supabase-js"
+  ],
+  "registryDependencies": [
+    "card",
+    "table",
+    "badge",
+    "button",
+    "scroll-area",
+    "code-block"
+  ],
+  "files": [
+    {
+      "path": "registry/supremetoolkit/webhook-handler/components/ui/WebhookLoggerView.tsx",
+      "target": "components/ui/webhook-logger-view.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "registry/supremetoolkit/webhook-handler/hooks/useWebhooks.ts",
+      "target": "hooks/use-webhooks.ts",
+      "type": "registry:hook"
+    },
+    {
+      "path": "registry/supremetoolkit/webhook-handler/actions/webhook-actions.ts",
+      "target": "actions/webhook-actions.ts",
+      "type": "registry:action"
+    },
+    {
+      "path": "registry/supremetoolkit/webhook-handler/api/webhooks/[source]/route.ts",
+      "target": "app/api/webhooks/[source]/route.ts",
+      "type": "registry:api"
+    },
+    {
+      "path": "registry/supremetoolkit/webhook-handler/lib/webhook-db.ts",
+      "target": "lib/webhook-db.ts",
+      "type": "registry:lib"
+    },
+    {
+      "path": "registry/supremetoolkit/webhook-handler/types/index.ts",
+      "target": "types/webhook.ts",
+      "type": "registry:type"
+    },
+    {
+      "path": "registry/supremetoolkit/webhook-handler/README.md",
+      "target": "docs/modules/webhook-handler.md",
+      "type": "registry:doc"
+    }
+  ],
+  "meta": {
+    "moduleName": "webhook-handler"
+  }
+}

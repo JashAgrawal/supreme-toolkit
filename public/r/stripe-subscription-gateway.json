@@ -1,0 +1,94 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stripe-subscription-gateway",
+  "type": "registry:module",
+  "title": "Stripe Subscription Gateway",
+  "description": "Comprehensive Stripe integration for subscriptions, one-time payments, customer portal, and webhook handling. Includes UI components like PayButton, PricingCard, and SubscriptionManager, along with hooks and server actions.",
+  "dependencies": [
+    "stripe",
+    "@stripe/stripe-js"
+  ],
+  "registryDependencies": [
+    "button",
+    "card",
+    "badge",
+    "separator",
+    "input",
+    "label"
+  ],
+  "files": [
+    {
+      "path": "lib/stripe.ts",
+      "target": "lib/stripe.ts",
+      "type": "registry:lib"
+    },
+    {
+      "path": "lib/pricing.ts",
+      "target": "lib/pricing.ts",
+      "type": "registry:lib"
+    },
+    {
+      "path": "hooks/use-stripe.ts",
+      "target": "hooks/use-stripe.ts",
+      "type": "registry:hook"
+    },
+    {
+      "path": "components/ui/pay-button.tsx",
+      "target": "components/ui/pay-button.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "components/ui/pricing-card.tsx",
+      "target": "components/ui/pricing-card.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "components/ui/subscription-manager.tsx",
+      "target": "components/ui/subscription-manager.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "actions/stripe-actions.ts",
+      "target": "actions/stripe-actions.ts",
+      "type": "registry:action"
+    },
+    {
+      "path": "app/api/stripe/create-checkout-session/route.ts",
+      "target": "app/api/stripe/create-checkout-session/route.ts",
+      "type": "registry:api"
+    },
+    {
+      "path": "app/api/stripe/subscription/route.ts",
+      "target": "app/api/stripe/subscription/route.ts",
+      "type": "registry:api"
+    },
+    {
+      "path": "app/api/stripe/cancel-subscription/route.ts",
+      "target": "app/api/stripe/cancel-subscription/route.ts",
+      "type": "registry:api"
+    },
+    {
+      "path": "app/api/stripe/reactivate-subscription/route.ts",
+      "target": "app/api/stripe/reactivate-subscription/route.ts",
+      "type": "registry:api"
+    },
+    {
+      "path": "app/api/stripe/customer-portal/route.ts",
+      "target": "app/api/stripe/customer-portal/route.ts",
+      "type": "registry:api"
+    },
+    {
+      "path": "app/api/stripe/webhooks/route.ts",
+      "target": "app/api/stripe/webhooks/route.ts",
+      "type": "registry:api"
+    },
+    {
+      "path": "registry/supremetoolkit/stripe-subscription-gateway/README.md",
+      "target": "docs/modules/stripe-subscription-gateway.md",
+      "type": "registry:doc"
+    }
+  ],
+  "meta": {
+    "moduleName": "stripe-subscription-gateway"
+  }
+}

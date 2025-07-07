@@ -1,0 +1,93 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "support-ticket-system",
+  "type": "registry:module",
+  "title": "Support Ticket System",
+  "description": "An end-to-end support ticketing system with user-facing forms, ticket viewing, admin dashboard, and API.",
+  "dependencies": [
+    "@supabase/supabase-js",
+    "lucide-react",
+    "zod"
+  ],
+  "registryDependencies": [
+    "button",
+    "input",
+    "textarea",
+    "card",
+    "table",
+    "badge",
+    "dialog",
+    "form",
+    "select"
+  ],
+  "files": [
+    {
+      "path": "registry/supremetoolkit/support-ticket-system/components/ui/CreateTicketForm.tsx",
+      "target": "components/ui/create-ticket-form.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "registry/supremetoolkit/support-ticket-system/components/ui/TicketList.tsx",
+      "target": "components/ui/ticket-list.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "registry/supremetoolkit/support-ticket-system/components/ui/TicketListItem.tsx",
+      "target": "components/ui/ticket-list-item.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "registry/supremetoolkit/support-ticket-system/components/ui/TicketView.tsx",
+      "target": "components/ui/ticket-view.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "registry/supremetoolkit/support-ticket-system/components/admin/AdminTicketDashboard.tsx",
+      "target": "components/admin/admin-ticket-dashboard.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "registry/supremetoolkit/support-ticket-system/hooks/useSupportTickets.ts",
+      "target": "hooks/use-support-tickets.ts",
+      "type": "registry:hook"
+    },
+    {
+      "path": "registry/supremetoolkit/support-ticket-system/actions/support-actions.ts",
+      "target": "actions/support-actions.ts",
+      "type": "registry:action"
+    },
+    {
+      "path": "registry/supremetoolkit/support-ticket-system/lib/support-db.ts",
+      "target": "lib/support-db.ts",
+      "type": "registry:lib"
+    },
+    {
+      "path": "registry/supremetoolkit/support-ticket-system/types/index.ts",
+      "target": "types/support.ts",
+      "type": "registry:type"
+    },
+    {
+      "path": "registry/supremetoolkit/support-ticket-system/api/support/tickets/route.ts",
+      "target": "app/api/support/tickets/route.ts",
+      "type": "registry:api"
+    },
+    {
+      "path": "registry/supremetoolkit/support-ticket-system/api/support/tickets/[ticketId]/route.ts",
+      "target": "app/api/support/tickets/[ticketId]/route.ts",
+      "type": "registry:api"
+    },
+    {
+      "path": "registry/supremetoolkit/support-ticket-system/api/support/tickets/[ticketId]/messages/route.ts",
+      "target": "app/api/support/tickets/[ticketId]/messages/route.ts",
+      "type": "registry:api"
+    },
+    {
+      "path": "registry/supremetoolkit/support-ticket-system/README.md",
+      "target": "docs/modules/support-ticket-system.md",
+      "type": "registry:doc"
+    }
+  ],
+  "meta": {
+    "moduleName": "support-ticket-system"
+  }
+}
