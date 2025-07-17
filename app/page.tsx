@@ -5,7 +5,20 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { ThemeToggleDropdown } from "@/components/ui/theme-toggle-dropdown"
 import { Footer } from "@/components/footer"
-import { Sparkles, Zap, Rocket, Copy, ChevronDown } from "lucide-react"
+import {
+  Sparkles,
+  Zap,
+  Rocket,
+  Copy,
+  ChevronDown,
+  MessageSquare,
+  Bot,
+  Ticket,
+  MessageCircle,
+  Upload,
+  FileText,
+  ArrowRight
+} from "lucide-react"
 
 export default function Home() {
   return (
@@ -22,19 +35,19 @@ export default function Home() {
               </Link>
               <Link
                 href="/docs"
-                className="transition-colors hover:text-foreground/80 text-foreground/60 hover:text-blue-600"
+                className="transition-colors text-foreground/60 hover:text-blue-600"
               >
                 Docs
               </Link>
               <Link
-                href="/docs/components/authentication"
-                className="transition-colors hover:text-foreground/80 text-foreground/60 hover:text-purple-600"
+                href="/docs/modules"
+                className="transition-colors text-foreground/60 hover:text-purple-600"
               >
-                Components
+                Modules
               </Link>
               <Link
                 href="/docs/installation"
-                className="transition-colors hover:text-foreground/80 text-foreground/60 hover:text-green-600"
+                className="transition-colors text-foreground/60 hover:text-green-600"
               >
                 Installation
               </Link>
@@ -95,7 +108,7 @@ export default function Home() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-2 text-sm">
-            {["⚡ Next.js 15", "🎨 Tailwind", "🔧 TypeScript", "📦 shadcn/ui", "🔐 Auth", "💳 Payments"].map((tech) => (
+            {["⚡ Next.js 15", "🎨 Tailwind", "🔧 TypeScript", "📦 shadcn/ui", "🚀 6 Modules", "✨ Production Ready"].map((tech) => (
               <Badge
                 key={tech}
                 variant="secondary"
@@ -155,108 +168,221 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Production-Ready Modules 🚀
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300">Copy, paste, customize. That's it.</p>
+            <p className="text-lg text-gray-600 dark:text-gray-300">6 complete modules ready for production</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {/* Auth Module */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            {/* Chat Realtime */}
             <Card className="hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 hover:border-blue-200 dark:hover:border-blue-800 group">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle className="flex items-center gap-2 group-hover:text-blue-600 transition-colors">
-                    🔐 Authentication
+                    <MessageSquare className="w-5 h-5" />
+                    Real-time Chat
                   </CardTitle>
                   <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Ready</Badge>
                 </div>
-                <CardDescription>Complete auth with Google, GitHub, email + password</CardDescription>
+                <CardDescription>Complete chat system with Convex backend and presence indicators</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   <div className="flex flex-wrap gap-1">
-                    <Badge variant="outline" className="text-xs">
-                      Google
-                    </Badge>
-                    <Badge variant="outline" className="text-xs">
-                      GitHub
-                    </Badge>
-                    <Badge variant="outline" className="text-xs">
-                      Email
-                    </Badge>
+                    <Badge variant="outline" className="text-xs">Convex</Badge>
+                    <Badge variant="outline" className="text-xs">Real-time</Badge>
+                    <Badge variant="outline" className="text-xs">Presence</Badge>
                   </div>
-                  <Button asChild size="sm" className="w-full bg-blue-600 hover:bg-blue-700">
-                    <Link href="/auth-demo">Try Demo</Link>
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button asChild size="sm" className="flex-1 bg-blue-600 hover:bg-blue-700">
+                      <Link href="/preview/chat-realtime">
+                        <ArrowRight className="w-3 h-3 mr-1" />
+                        Demo
+                      </Link>
+                    </Button>
+                    <Button asChild variant="outline" size="sm" className="flex-1">
+                      <Link href="/docs/modules/chat-realtime">Docs</Link>
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Payments */}
+            {/* Chatbot GPT */}
             <Card className="hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 hover:border-purple-200 dark:hover:border-purple-800 group">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle className="flex items-center gap-2 group-hover:text-purple-600 transition-colors">
-                    💳 Stripe Payments
+                    <Bot className="w-5 h-5" />
+                    AI Chatbot
                   </CardTitle>
                   <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Ready</Badge>
                 </div>
-                <CardDescription>One-time payments, subscriptions, customer portal</CardDescription>
+                <CardDescription>OpenAI-powered chatbot with streaming responses and conversation management</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   <div className="flex flex-wrap gap-1">
-                    <Badge variant="outline" className="text-xs">
-                      Checkout
-                    </Badge>
-                    <Badge variant="outline" className="text-xs">
-                      Webhooks
-                    </Badge>
-                    <Badge variant="outline" className="text-xs">
-                      Portal
-                    </Badge>
+                    <Badge variant="outline" className="text-xs">OpenAI</Badge>
+                    <Badge variant="outline" className="text-xs">Streaming</Badge>
+                    <Badge variant="outline" className="text-xs">GPT-4</Badge>
                   </div>
-                  <Button asChild size="sm" className="w-full bg-purple-600 hover:bg-purple-700">
-                    <Link href="/stripe-demo">Try Demo</Link>
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button asChild size="sm" className="flex-1 bg-purple-600 hover:bg-purple-700">
+                      <Link href="/preview/chatbot-gpt">
+                        <ArrowRight className="w-3 h-3 mr-1" />
+                        Demo
+                      </Link>
+                    </Button>
+                    <Button asChild variant="outline" size="sm" className="flex-1">
+                      <Link href="/docs/modules/chatbot-gpt">Docs</Link>
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Waitlist */}
-            <Card className="hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 hover:border-green-200 dark:hover:border-green-800 group">
+            {/* Support Tickets */}
+            <Card className="hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 hover:border-orange-200 dark:hover:border-orange-800 group">
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle className="flex items-center gap-2 group-hover:text-green-600 transition-colors">
-                    📝 Waitlist
+                  <CardTitle className="flex items-center gap-2 group-hover:text-orange-600 transition-colors">
+                    <Ticket className="w-5 h-5" />
+                    Support Tickets
                   </CardTitle>
                   <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Ready</Badge>
                 </div>
-                <CardDescription>Email capture with validation and confirmations</CardDescription>
+                <CardDescription>Complete ticket system with comments, categories, and admin dashboard</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   <div className="flex flex-wrap gap-1">
-                    <Badge variant="outline" className="text-xs">
-                      Validation
-                    </Badge>
-                    <Badge variant="outline" className="text-xs">
-                      Email
-                    </Badge>
-                    <Badge variant="outline" className="text-xs">
-                      Analytics
-                    </Badge>
+                    <Badge variant="outline" className="text-xs">Tickets</Badge>
+                    <Badge variant="outline" className="text-xs">Comments</Badge>
+                    <Badge variant="outline" className="text-xs">Admin</Badge>
                   </div>
-                  <Button asChild size="sm" className="w-full bg-green-600 hover:bg-green-700">
-                    <Link href="/waitlist-demo">Try Demo</Link>
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button asChild size="sm" className="flex-1 bg-orange-600 hover:bg-orange-700">
+                      <Link href="/preview/support-ticket-system">
+                        <ArrowRight className="w-3 h-3 mr-1" />
+                        Demo
+                      </Link>
+                    </Button>
+                    <Button asChild variant="outline" size="sm" className="flex-1">
+                      <Link href="/docs/modules/support-ticket-system">Docs</Link>
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Feedback Widget */}
+            <Card className="hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 hover:border-green-200 dark:hover:border-green-800 group">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2 group-hover:text-green-600 transition-colors">
+                    <MessageCircle className="w-5 h-5" />
+                    Feedback Widget
+                  </CardTitle>
+                  <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Ready</Badge>
+                </div>
+                <CardDescription>User feedback collection with ratings, screenshots, and analytics</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs">Ratings</Badge>
+                    <Badge variant="outline" className="text-xs">Screenshots</Badge>
+                    <Badge variant="outline" className="text-xs">Analytics</Badge>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button asChild size="sm" className="flex-1 bg-green-600 hover:bg-green-700">
+                      <Link href="/preview/feedback-widget">
+                        <ArrowRight className="w-3 h-3 mr-1" />
+                        Demo
+                      </Link>
+                    </Button>
+                    <Button asChild variant="outline" size="sm" className="flex-1">
+                      <Link href="/docs/modules/feedback-widget">Docs</Link>
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Image Uploader */}
+            <Card className="hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 hover:border-indigo-200 dark:hover:border-indigo-800 group">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2 group-hover:text-indigo-600 transition-colors">
+                    <Upload className="w-5 h-5" />
+                    Image Uploader
+                  </CardTitle>
+                  <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Ready</Badge>
+                </div>
+                <CardDescription>Complete image upload with drag & drop, cloud storage, and optimization</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs">Drag & Drop</Badge>
+                    <Badge variant="outline" className="text-xs">Cloudinary</Badge>
+                    <Badge variant="outline" className="text-xs">Progress</Badge>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button asChild size="sm" className="flex-1 bg-indigo-600 hover:bg-indigo-700">
+                      <Link href="/preview/image-uploader">
+                        <ArrowRight className="w-3 h-3 mr-1" />
+                        Demo
+                      </Link>
+                    </Button>
+                    <Button asChild variant="outline" size="sm" className="flex-1">
+                      <Link href="/docs/modules/image-uploader">Docs</Link>
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Rich Text Editor */}
+            <Card className="hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 hover:border-pink-200 dark:hover:border-pink-800 group">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2 group-hover:text-pink-600 transition-colors">
+                    <FileText className="w-5 h-5" />
+                    Rich Text Editor
+                  </CardTitle>
+                  <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Ready</Badge>
+                </div>
+                <CardDescription>WYSIWYG editor with toolbar, formatting, and export capabilities</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs">WYSIWYG</Badge>
+                    <Badge variant="outline" className="text-xs">Toolbar</Badge>
+                    <Badge variant="outline" className="text-xs">Export</Badge>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button asChild size="sm" className="flex-1 bg-pink-600 hover:bg-pink-700">
+                      <Link href="/preview/rich-text-editor">
+                        <ArrowRight className="w-3 h-3 mr-1" />
+                        Demo
+                      </Link>
+                    </Button>
+                    <Button asChild variant="outline" size="sm" className="flex-1">
+                      <Link href="/docs/modules/rich-text-editor">Docs</Link>
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
           </div>
 
           <div className="text-center mt-8">
-            <Button variant="outline" className="hover:bg-gray-50 dark:hover:bg-gray-800 bg-transparent">
-              <ChevronDown className="w-4 h-4 mr-2" />
-              View All Modules
+            <Button asChild variant="outline" className="hover:bg-gray-50 dark:hover:bg-gray-800 bg-transparent">
+              <Link href="/docs/modules">
+                <ChevronDown className="w-4 h-4 mr-2" />
+                View All Modules
+              </Link>
             </Button>
           </div>
         </div>

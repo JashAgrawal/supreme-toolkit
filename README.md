@@ -35,7 +35,7 @@ The true strength of Supreme Toolkit lies in **predictability** and **concept-ba
 
 - 🔐 **Authentication** - betterAuth with Google, GitHub, Email providers
 - 💳 **Payments** - Complete Stripe integration with webhooks
-- 💬 **Chat** - Realtime chat with Supabase/Pusher
+- 💬 **Chat** - Realtime chat with Convex
 - 🤖 **Chatbot** - OpenAI-powered chatbot widget
 - 🎫 **Support** - Complete ticketing system
 - 📧 **Email** - Resend/Nodemailer integration
@@ -57,37 +57,78 @@ cd supreme-toolkit
 npm install
 ```
 
-### 2. Environment Setup
+### 2. Set up Convex Database
+
+Supreme Toolkit now uses Convex as the primary database for all modules:
+
+```bash
+# Install Convex CLI
+npm install -g convex
+
+# Initialize Convex
+npx convex dev
+```
+
+### 3. Environment Setup
 
 ```bash
 cp .env.example .env.local
-# Fill in your API keys and configuration
 ```
 
-### 3. Configure Modules
+Add your Convex URL and other configuration:
+
+```bash
+# .env.local
+NEXT_PUBLIC_CONVEX_URL=your_convex_deployment_url
+
+# Other API keys
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_key
+OPENAI_API_KEY=your_openai_key
+RESEND_API_KEY=your_resend_key
+```
+
+### 4. Configure Modules
 
 Edit `config.tsx` to enable the modules you want to use:
 
 ```typescript
-export const toolkitConfig: ToolkitConfig = {
-  auth: {
-    providers: ['google', 'email', 'github'],
-  },
-  stripe: {
-    apiKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
-    productIds: ['prod_example1', 'prod_example2'],
-  },
-  // ... other modules
+export const convexConfig = {
+  url: process.env.NEXT_PUBLIC_CONVEX_URL || "",
+};
+
+export const waitlistConfig = {
+  database: 'convex', // All modules now use Convex
+  successRedirect: '/thanks',
+  emailNotifications: true,
+};
+
+export const supportConfig = {
+  database: 'convex',
+  defaultPriority: 'medium' as const,
+  emailNotifications: true,
 };
 ```
 
-### 4. Start Development
+### 5. Start Development
 
 ```bash
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to see your app.
+
+## 🗄️ Database Integration
+
+Supreme Toolkit uses **Convex** as the primary database solution, providing:
+
+- **Real-time synchronization** - All data changes are instantly synchronized across clients
+- **Type safety** - Full TypeScript support with generated types
+- **Scalability** - Handles thousands of concurrent users
+- **ACID transactions** - Ensures data consistency
+- **Built-in caching** - Optimized performance out of the box
+- **Offline support** - Works seamlessly with poor network conditions
+
+All modules are production-ready with no dummy data or in-memory storage.
 
 ## 📦 Available Modules
 
@@ -105,7 +146,7 @@ Open [http://localhost:3000](http://localhost:3000) to see your app.
 ### 🚀 Coming Soon Modules
 | Module | Description | Status |
 |--------|-------------|--------|
-| `chat-realtime` | Realtime chat system with Supabase or Pusher backend | 🔜 Coming Soon |
+| `chat-realtime` | Realtime chat system with Convex backend | 🔜 Coming Soon |
 | `chatbot-gpt` | AI chatbot widget with OpenAI integration and backend logic | 🔜 Coming Soon |
 | `support-ticket-system` | End-to-end ticketing interface with API and management system | 🔜 Coming Soon |
 | `webhook-handler` | Generic webhook endpoint with logger UI and event processing | 🔜 Coming Soon |

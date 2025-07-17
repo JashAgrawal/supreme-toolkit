@@ -1,346 +1,218 @@
 /**
  * Supreme Toolkit Configuration
- * 
- * This file contains all configuration for Supreme Toolkit modules.
- * Each module can access its configuration through this centralized system.
+ *
+ * Configure your Supreme Toolkit modules here.
+ * Only include the modules you're using in your project.
+ *
+ * Each module has its own configuration interface.
+ * Add environment variables to your .env.local file.
  */
 
 // ============================================================================
-// TYPE DEFINITIONS
-// ============================================================================
-
-export interface AuthConfig {
-  providers: ('google' | 'github' | 'email')[];
-  redirectUrl?: string;
-  sessionDuration?: number; // in seconds
-}
-
-export interface StripeConfig {
-  apiKey: string;
-  productIds: string[];
-  successUrl?: string;
-  cancelUrl?: string;
-  webhookSecret?: string;
-}
-
-export interface ResendConfig {
-  apiKey: string;
-  fromEmail?: string;
-  fromName?: string;
-}
-
-export interface OpenAIConfig {
-  apiKey: string;
-  model?: string;
-  maxTokens?: number;
-  temperature?: number;
-}
-
-export interface SupabaseConfig {
-  url: string;
-  anonKey: string;
-  serviceRoleKey?: string;
-}
-
-export interface CloudinaryConfig {
-  cloudName: string;
-  apiKey: string;
-  apiSecret: string;
-  uploadPreset?: string;
-}
-
-export interface WaitlistConfig {
-  successRedirect: string;
-  emailNotifications?: boolean;
-  autoApprove?: boolean;
-}
-
-export interface RichTextEditorConfig {
-  saveEndpoint: string;
-  autoSave?: boolean;
-  autoSaveInterval?: number; // in milliseconds
-}
-
-export interface AnalyticsConfig {
-  trackingId?: string;
-  enablePageViews?: boolean;
-  enableEvents?: boolean;
-}
-
-export interface ChatConfig {
-  provider: 'supabase' | 'pusher';
-  maxMessageLength?: number;
-  enableTypingIndicators?: boolean;
-  enableFileUploads?: boolean;
-}
-
-export interface SupportConfig {
-  defaultPriority: 'low' | 'medium' | 'high' | 'urgent';
-  autoAssignment?: boolean;
-  emailNotifications?: boolean;
-}
-
-export interface WebhookConfig {
-  enableLogging?: boolean;
-  retryAttempts?: number;
-  timeout?: number; // in milliseconds
-}
-
-export interface FeedbackConfig {
-  categories?: string[];
-  enableScreenshots?: boolean;
-  emailNotifications?: boolean;
-}
-
-export interface NewsletterConfig {
-  provider: 'mailerlite' | 'postmark' | 'resend';
-  doubleOptIn?: boolean;
-  welcomeEmail?: boolean;
-}
-
-// ============================================================================
-// MAIN CONFIG INTERFACE
-// ============================================================================
-
-export interface ToolkitConfig {
-  // Core modules
-  auth?: AuthConfig;
-  stripe?: StripeConfig;
-  resend?: ResendConfig;
-  
-  // Advanced modules
-  openai?: OpenAIConfig;
-  supabase?: SupabaseConfig;
-  cloudinary?: CloudinaryConfig;
-  
-  // Feature modules
-  waitlist?: WaitlistConfig;
-  richTextEditor?: RichTextEditorConfig;
-  analytics?: AnalyticsConfig;
-  chat?: ChatConfig;
-  support?: SupportConfig;
-  webhook?: WebhookConfig;
-  feedback?: FeedbackConfig;
-  newsletter?: NewsletterConfig;
-}
-
-// ============================================================================
-// DEFAULT CONFIGURATION
-// ============================================================================
-
-export const defaultConfig: Partial<ToolkitConfig> = {
-  auth: {
-    providers: ['email'],
-    sessionDuration: 30 * 24 * 60 * 60, // 30 days
-  },
-  waitlist: {
-    successRedirect: '/thanks',
-    emailNotifications: true,
-    autoApprove: false,
-  },
-  richTextEditor: {
-    saveEndpoint: '/api/save-content',
-    autoSave: true,
-    autoSaveInterval: 5000, // 5 seconds
-  },
-  analytics: {
-    enablePageViews: true,
-    enableEvents: true,
-  },
-  chat: {
-    provider: 'supabase',
-    maxMessageLength: 1000,
-    enableTypingIndicators: true,
-    enableFileUploads: false,
-  },
-  support: {
-    defaultPriority: 'medium',
-    autoAssignment: false,
-    emailNotifications: true,
-  },
-  webhook: {
-    enableLogging: true,
-    retryAttempts: 3,
-    timeout: 30000, // 30 seconds
-  },
-  feedback: {
-    categories: ['bug', 'feature', 'improvement', 'other'],
-    enableScreenshots: true,
-    emailNotifications: true,
-  },
-  newsletter: {
-    provider: 'resend',
-    doubleOptIn: true,
-    welcomeEmail: true,
-  },
-};
-
-// ============================================================================
-// USER CONFIGURATION
+// MODULE CONFIGURATIONS
 // ============================================================================
 
 /**
- * Supreme Toolkit Configuration
- * 
- * Configure your Supreme Toolkit modules here.
- * Only include the modules you're using in your project.
+ * Authentication Module Configuration
+ * Requires: better-auth setup
  */
-export const toolkitConfig: ToolkitConfig = {
-  // waitlist-component: {
-  //   // Add your waitlist-component configuration here
-  // },
+export const authConfig = {
+  providers: ['google', 'email', 'github'] as const,
+  // Add your auth configuration here
+};
 
-  // Authentication with betterAuth
-  auth: {
-    providers: ['google', 'email', 'github'],
-  },
-  
-  // Stripe payments
-  stripe: {
-    apiKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
-    productIds: ['prod_example1', 'prod_example2'],
-    successUrl: '/payment/success',
-    cancelUrl: '/payment/cancel',
-    webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
-  },
-  
-  // Email with Resend
-  resend: {
-    apiKey: process.env.RESEND_API_KEY!,
-    fromEmail: 'noreply@yourapp.com',
-    fromName: 'Your App',
-  },
-  
-  // OpenAI for chatbot
-  openai: {
-    apiKey: process.env.OPENAI_API_KEY!,
-    model: 'gpt-4',
-    maxTokens: 1000,
-    temperature: 0.7,
-  },
-  
-  // Supabase for realtime features
-  supabase: {
-    url: process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    serviceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
-  },
-  
-  // Cloudinary for image uploads
-  cloudinary: {
-    cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!,
-    apiKey: process.env.CLOUDINARY_API_KEY!,
-    apiSecret: process.env.CLOUDINARY_API_SECRET!,
-    uploadPreset: 'supreme-toolkit',
-  },
-  
-  // Waitlist configuration
-  waitlist: {
-    successRedirect: '/thanks',
-    emailNotifications: true,
-  },
-  
-  // Rich text editor
-  richTextEditor: {
-    saveEndpoint: '/api/save-content',
-    autoSave: true,
-    autoSaveInterval: 3000, // 3 seconds
-  },
-  
-  // Analytics
-  analytics: {
-    trackingId: process.env.NEXT_PUBLIC_GA_TRACKING_ID,
-    enablePageViews: true,
-    enableEvents: true,
-  },
+/**
+ * Stripe Payment Configuration
+ * Requires: NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY, STRIPE_SECRET_KEY
+ */
+export const stripeConfig = {
+  apiKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+  secretKey: process.env.STRIPE_SECRET_KEY,
+  webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
+  successUrl: '/payment/success',
+  cancelUrl: '/payment/cancel',
+  // Add your Stripe configuration here
+};
+
+/**
+ * Mailer Configuration
+ * Requires: RESEND_API_KEY or SMTP credentials
+ */
+export const mailerConfig = {
+  provider: 'resend' as const,
+  resendApiKey: process.env.RESEND_API_KEY,
+  fromEmail: 'noreply@yourapp.com',
+  fromName: 'Your App',
+  // Add your mailer configuration here
+};
+
+/**
+ * Convex Database Configuration
+ * Requires: NEXT_PUBLIC_CONVEX_URL
+ */
+export const convexConfig = {
+  url: process.env.NEXT_PUBLIC_CONVEX_URL || "",
+  // Add your Convex configuration here
+};
+
+/**
+ * Waitlist Configuration
+ */
+export const waitlistConfig = {
+  successRedirect: '/thanks',
+  emailNotifications: true,
+  database: 'convex', // Using Convex as the database
+};
+
+/**
+ * Chat Realtime Configuration
+ * Now using Convex for real-time messaging
+ */
+export const chatConfig = {
+  database: 'convex', // Using Convex for real-time chat
+  maxMessageLength: 1000,
+  enableFileUploads: true,
+  enableTypingIndicators: true,
+  enableReactions: true,
+  maxParticipants: 100,
+  // Add your chat configuration here
+};
+
+/**
+ * Chatbot GPT Configuration
+ * Requires: OPENAI_API_KEY
+ */
+export const chatbotConfig = {
+  openaiApiKey: process.env.OPENAI_API_KEY || "",
+  model: 'gpt-4',
+  maxTokens: 1000,
+  temperature: 0.7,
+  systemPrompt: 'You are a helpful assistant.',
+  enableStreaming: true,
+  enableFeedback: true,
+  // Add your chatbot configuration here
+};
+
+/**
+ * Support Ticket System Configuration
+ */
+export const supportConfig = {
+  database: 'convex', // Using Convex for support tickets
+  defaultPriority: 'medium' as const,
+  emailNotifications: true,
+  autoAssignment: false,
+  enableFileUploads: true,
+  maxFileSize: 10,
+  allowedFileTypes: ['image/*', '.pdf', '.doc', '.docx'],
+};
+
+/**
+ * Feedback Widget Configuration
+ */
+export const feedbackConfig = {
+  database: 'convex', // Using Convex for feedback storage
+  categories: ['bug', 'feature', 'improvement', 'other'],
+  enableScreenshots: true,
+  emailNotifications: true,
+  enableRatings: true,
+  enableEmailCollection: true,
+};
+
+/**
+ * Image Uploader Configuration
+ * Requires: CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET (for Cloudinary)
+ */
+export const imageUploaderConfig = {
+  provider: 'cloudinary' as const,
+  maxFileSize: 10, // MB
+  allowedFormats: ['jpg', 'jpeg', 'png', 'webp', 'gif'],
+  enableThumbnails: true,
+  enableOptimization: true,
+  // Add your image uploader configuration here
+};
+
+/**
+ * Rich Text Editor Configuration
+ */
+export const richTextEditorConfig = {
+  placeholder: 'Start writing...',
+  enableWordCount: true,
+  enableSpellCheck: true,
+  autoSave: true,
+  autoSaveInterval: 30000, // 30 seconds
+  linkValidation: true,
+  // Add your editor configuration here
 };
 
 // ============================================================================
-// CONFIG UTILITIES
+// CONFIGURATION UTILITIES
 // ============================================================================
 
 /**
  * Get configuration for a specific module
+ * This function provides backward compatibility for existing modules
  */
-export function getModuleConfig<K extends keyof ToolkitConfig>(
-  module: K
-): ToolkitConfig[K] {
-  const userConfig = toolkitConfig[module];
-  const defaultModuleConfig = defaultConfig[module];
-  
-  if (!userConfig && !defaultModuleConfig) {
-    throw new Error(`Configuration for module "${module}" not found`);
+export function getModuleConfig(moduleName: string): any {
+  switch (moduleName) {
+    case 'auth':
+      return authConfig;
+    case 'stripe':
+      return stripeConfig;
+    case 'mailer':
+      return mailerConfig;
+    case 'waitlist':
+      return waitlistConfig;
+    case 'chat':
+      return chatConfig;
+    case 'chatbot':
+      return chatbotConfig;
+    case 'support':
+    case 'tickets':
+      return supportConfig;
+    case 'feedback':
+      return feedbackConfig;
+    case 'imageUpload':
+    case 'imageUploader':
+      return imageUploaderConfig;
+    case 'richTextEditor':
+    case 'editor':
+      return richTextEditorConfig;
+    case 'convex':
+      return convexConfig;
+    default:
+      throw new Error(`Configuration for module "${moduleName}" not found`);
   }
-  
-  // Merge user config with defaults
-  return {
-    ...defaultModuleConfig,
-    ...userConfig,
-  } as ToolkitConfig[K];
 }
 
-/**
- * Validate that required environment variables are set
- */
-export function validateConfig(): { isValid: boolean; errors: string[] } {
-  const errors: string[] = [];
-  
-  // Check Stripe config if enabled
-  if (toolkitConfig.stripe) {
-    if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
-      errors.push('NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY is required for Stripe module');
-    }
-    if (!process.env.STRIPE_SECRET_KEY) {
-      errors.push('STRIPE_SECRET_KEY is required for Stripe module');
-    }
-  }
-  
-  // Check Resend config if enabled
-  if (toolkitConfig.resend) {
-    if (!process.env.RESEND_API_KEY) {
-      errors.push('RESEND_API_KEY is required for Resend module');
-    }
-  }
-  
-  // Check OpenAI config if enabled
-  if (toolkitConfig.openai) {
-    if (!process.env.OPENAI_API_KEY) {
-      errors.push('OPENAI_API_KEY is required for OpenAI module');
-    }
-  }
-  
-  // Check Supabase config if enabled
-  if (toolkitConfig.supabase) {
-    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
-      errors.push('NEXT_PUBLIC_SUPABASE_URL is required for Supabase module');
-    }
-    if (!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-      errors.push('NEXT_PUBLIC_SUPABASE_ANON_KEY is required for Supabase module');
-    }
-  }
-  
-  // Check Cloudinary config if enabled
-  if (toolkitConfig.cloudinary) {
-    if (!process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME) {
-      errors.push('NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME is required for Cloudinary module');
-    }
-    if (!process.env.CLOUDINARY_API_KEY) {
-      errors.push('CLOUDINARY_API_KEY is required for Cloudinary module');
-    }
-    if (!process.env.CLOUDINARY_API_SECRET) {
-      errors.push('CLOUDINARY_API_SECRET is required for Cloudinary module');
-    }
-  }
-  
-  return {
-    isValid: errors.length === 0,
-    errors,
-  };
-}
+// ============================================================================
+// ENVIRONMENT VARIABLES REFERENCE
+// ============================================================================
 
 /**
- * Check if a module is enabled in the configuration
+ * Required Environment Variables by Module:
+ *
+ * AUTH MODULE:
+ * - BETTER_AUTH_SECRET
+ * - GOOGLE_CLIENT_ID (if using Google)
+ * - GOOGLE_CLIENT_SECRET (if using Google)
+ * - GITHUB_CLIENT_ID (if using GitHub)
+ * - GITHUB_CLIENT_SECRET (if using GitHub)
+ *
+ * STRIPE MODULES:
+ * - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+ * - STRIPE_SECRET_KEY
+ * - STRIPE_WEBHOOK_SECRET
+ *
+ * MAILER MODULE:
+ * - RESEND_API_KEY (for Resend)
+ * - SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS (for Nodemailer)
+ *
+ *
+ * CHATBOT GPT:
+ * - OPENAI_API_KEY
+ *
+ * IMAGE UPLOADER:
+ * - CLOUDINARY_CLOUD_NAME (for Cloudinary)
+ * - CLOUDINARY_API_KEY (for Cloudinary)
+ * - CLOUDINARY_API_SECRET (for Cloudinary)
  */
-export function isModuleEnabled(module: keyof ToolkitConfig): boolean {
-  return toolkitConfig[module] !== undefined;
-}

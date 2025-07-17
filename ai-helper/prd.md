@@ -145,7 +145,7 @@ export async function onPaymentComplete({ session }) {
 | ----------------------------- | --------------------------------------------------------------|
 | `auth`                        | Plug-in betterAuth + Google OAuth in one command              |
 | `stripe-subscription-gateway` | Stripe checkout button, webhook handler, payment success logic|
-| `chat-realtime`               | Realtime chat system (Supabase or Pusher-based)               |
+| `chat-realtime`               | Realtime chat system (Convex-based)               |
 | `chatbot-gpt`                 | UI + OpenAI + backend logic for a chatbot widget              |
 | `support-ticket-system`       | End-to-end ticketing interface + API                          |
 | `webhook-handler`             | Generic webhook endpoint + logger UI                          |
@@ -215,10 +215,6 @@ export const toolkitConfig = {
   openai: {
     apiKey: process.env.OPENAI_API_KEY,
     model: "gpt-4",
-  },
-  supabase: {
-    url: process.env.NEXT_PUBLIC_SUPABASE_URL,
-    anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
   },
   cloudinary: {
     cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,

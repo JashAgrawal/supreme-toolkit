@@ -2,14 +2,18 @@
 
 import { WaitlistEntry } from "@/types";
 import { sendWaitlistWelcomeEmail, sendWaitlistApprovalEmail } from "@/lib/mailer";
+import { ConvexHttpClient } from "convex/browser";
+import { api } from "@/convex/_generated/api";
+import { getModuleConfig } from "@/config";
+import { Id } from "@/convex/_generated/dataModel";
 
 // ============================================================================
-// WAITLIST SERVER ACTIONS
+// WAITLIST SERVER ACTIONS WITH CONVEX
 // ============================================================================
 
-// Simple in-memory store for demo - replace with your database
-const waitlistStore: WaitlistEntry[] = [];
-let nextId = 1;
+// Initialize Convex client for server actions
+const convexConfig = getModuleConfig('convex');
+const convex = new ConvexHttpClient(convexConfig.url);
 
 /**
  * Check if email is already in waitlist
@@ -19,16 +23,37 @@ export async function checkIfAlreadyInWaitlist(email: string): Promise<{
   entry?: WaitlistEntry;
 }> {
   try {
-    // In a real app, this would query your database
-    const existingEntry = waitlistStore.find(entry => entry.email.toLowerCase() === email.toLowerCase());
+    const normalizedEmail = email.toLowerCase().trim();
+
+    // Check if email exists in Convex database
+    const existingEntry = await convex.query(api.waitlist.getWaitlistByEmail, {
+      email: normalizedEmail
+    });
+
+    if (existingEntry) {
+      return {
+        exists: true,
+        entry: {
+          id: existingEntry._id,
+          email: existingEntry.email,
+          name: existingEntry.name,
+          referralCode: existingEntry.referralCode,
+          status: existingEntry.status,
+          position: existingEntry.position,
+          createdAt: new Date(existingEntry.createdAt),
+          approvedAt: existingEntry.approvedAt ? new Date(existingEntry.approvedAt) : undefined,
+        },
+      };
+    }
 
     return {
-      exists: !!existingEntry,
-      entry: existingEntry,
+      exists: false,
     };
   } catch (error) {
     console.error('Error checking waitlist:', error);
-    throw new Error('Failed to check waitlist status');
+    return {
+      exists: false,
+    };
   }
 }
 
@@ -64,20 +89,35 @@ export async function onAddWaitlist(params: {
       };
     }
 
-    // Create new waitlist entry
-    const entry: WaitlistEntry = {
-      id: nextId.toString(),
+    // Create new waitlist entry in Convex
+    const entryId = await convex.mutation(api.waitlist.addToWaitlist, {
       email: params.email.toLowerCase(),
-      name: params.name,
+      name: params.name || '',
       referralCode: params.referralCode,
-      status: 'pending',
-      position: waitlistStore.length + 1,
-      createdAt: new Date(),
-    };
+      metadata: {
+        source: 'waitlist_form',
+      },
+    });
 
-    // Add to store (replace with database save)
-    waitlistStore.push(entry);
-    nextId++;
+    // Get the created entry
+    const createdEntry = await convex.query(api.waitlist.getWaitlistEntry, {
+      id: entryId
+    });
+
+    if (!createdEntry) {
+      throw new Error('Failed to retrieve created waitlist entry');
+    }
+
+    const entry: WaitlistEntry = {
+      id: createdEntry._id,
+      email: createdEntry.email,
+      name: createdEntry.name,
+      referralCode: createdEntry.referralCode,
+      status: createdEntry.status,
+      position: createdEntry.position,
+      createdAt: new Date(createdEntry.createdAt),
+      approvedAt: createdEntry.approvedAt ? new Date(createdEntry.approvedAt) : undefined,
+    };
 
     // Send welcome email
     try {
@@ -187,20 +227,34 @@ export async function approveWaitlistEntry(entryId: string, approvedBy?: string)
   error?: string;
 }> {
   try {
-    // Find the entry
-    const entryIndex = waitlistStore.findIndex(entry => entry.id === entryId);
-    if (entryIndex === -1) {
+    // Approve the entry in Convex
+    await convex.mutation(api.waitlist.approveWaitlistEntry, {
+      id: entryId as Id<"waitlist">,
+      approvedBy: approvedBy as Id<"users">,
+    });
+
+    // Get the updated entry
+    const updatedEntry = await convex.query(api.waitlist.getWaitlistEntry, {
+      id: entryId as Id<"waitlist">
+    });
+
+    if (!updatedEntry) {
       return {
         success: false,
-        error: 'Waitlist entry not found',
+        error: 'Failed to retrieve updated waitlist entry',
       };
     }
 
-    const entry = waitlistStore[entryIndex];
-
-    // Update entry status
-    entry.status = 'approved';
-    entry.approvedAt = new Date();
+    const entry: WaitlistEntry = {
+      id: updatedEntry._id,
+      email: updatedEntry.email,
+      name: updatedEntry.name,
+      referralCode: updatedEntry.referralCode,
+      status: updatedEntry.status,
+      position: updatedEntry.position,
+      createdAt: new Date(updatedEntry.createdAt),
+      approvedAt: updatedEntry.approvedAt ? new Date(updatedEntry.approvedAt) : undefined,
+    };
 
     // Send approval email
     try {
@@ -293,7 +347,10 @@ export async function getWaitlistEntry(email: string): Promise<{
   error?: string;
 }> {
   try {
-    const entry = waitlistStore.find(e => e.email.toLowerCase() === email.toLowerCase());
+    // Use Convex to get the entry by email
+    const entry = await convex.query(api.waitlist.getWaitlistByEmail, {
+      email: email.toLowerCase()
+    });
 
     if (!entry) {
       return {
@@ -304,7 +361,16 @@ export async function getWaitlistEntry(email: string): Promise<{
 
     return {
       success: true,
-      entry,
+      entry: {
+        id: entry._id,
+        email: entry.email,
+        name: entry.name,
+        referralCode: entry.referralCode,
+        status: entry.status,
+        position: entry.position,
+        createdAt: new Date(entry.createdAt),
+        approvedAt: entry.approvedAt ? new Date(entry.approvedAt) : undefined,
+      },
     };
   } catch (error) {
     console.error('Error getting waitlist entry:', error);
@@ -325,11 +391,14 @@ export async function getWaitlistStats(): Promise<{
   rejected: number;
 }> {
   try {
+    // Get stats from Convex
+    const stats = await convex.query(api.waitlist.getWaitlistStats, {});
+    
     return {
-      total: waitlistStore.length,
-      pending: waitlistStore.filter(e => e.status === 'pending').length,
-      approved: waitlistStore.filter(e => e.status === 'approved').length,
-      rejected: waitlistStore.filter(e => e.status === 'rejected').length,
+      total: stats.total || 0,
+      pending: stats.pending || 0,
+      approved: stats.approved || 0,
+      rejected: stats.rejected || 0,
     };
   } catch (error) {
     console.error('Error getting waitlist stats:', error);

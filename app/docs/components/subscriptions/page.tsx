@@ -22,8 +22,8 @@ export default function SubscriptionsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">🔄 Subscriptions Module</h1>
-        <p className="text-lg text-muted-foreground mt-2">
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight">🔄 Subscriptions Module</h1>
+        <p className="text-base md:text-lg text-muted-foreground mt-2">
           Complete subscription management with pricing plans, subscription lifecycle, and recurring billing.
         </p>
       </div>
@@ -267,7 +267,7 @@ STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret_here`, 'subs-env')}
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="components" className="space-y-4">
-            <TabsList className="grid w-full grid-cols-4">
+            <TabsList className="grid w-full grid-cols-2 md:grid-cols-4">
               <TabsTrigger value="components">Components</TabsTrigger>
               <TabsTrigger value="hooks">Hooks</TabsTrigger>
               <TabsTrigger value="pricing">Pricing</TabsTrigger>

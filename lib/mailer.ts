@@ -148,6 +148,41 @@ export async function sendWaitlistApprovalEmail(
 }
 
 /**
+ * Send feedback notification email
+ */
+export async function sendFeedbackNotificationEmail(
+  email: string,
+  name: string,
+  feedback: any
+): Promise<MailerResult> {
+  try {
+    // Always use the generic email logic, since no mailer exports sendFeedbackNotificationEmail
+    const subject = `Feedback Received: ${feedback.title}`;
+    const html = `
+      <h2>Your Feedback Has Been Received</h2>
+      <p>Hello ${name},</p>
+      <p>Thank you for your feedback. We've received your submission and will review it shortly.</p>
+      <h3>Feedback Details:</h3>
+      <p><strong>Type:</strong> ${feedback.type}</p>
+      <p><strong>Title:</strong> ${feedback.title}</p>
+      <p><strong>Status:</strong> ${feedback.status}</p>
+      <p>We appreciate your input and will keep you updated on any progress.</p>
+    `;
+    return await sendEmail({
+      to: email,
+      subject,
+      html,
+    });
+  } catch (error) {
+    console.error('Failed to send feedback notification email:', error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error occurred'
+    };
+  }
+}
+
+/**
  * Test email configuration
  */
 export async function testEmailConfiguration(): Promise<MailerResult & { mailerType?: string }> {
@@ -235,6 +270,7 @@ const mailer = {
   sendEmail,
   sendWaitlistWelcomeEmail,
   sendWaitlistApprovalEmail,
+  sendFeedbackNotificationEmail,
   testEmailConfiguration,
   getMailerInfo,
   sendTestEmail,

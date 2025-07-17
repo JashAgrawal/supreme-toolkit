@@ -6,16 +6,16 @@ export default function InstallationDocsPage() {
   return (
     <div className="space-y-6">
       <div className="space-y-3">
-        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
+        <h1 className="scroll-m-20 text-3xl md:text-4xl font-bold tracking-tight">
           Installation
         </h1>
-        <p className="text-xl text-muted-foreground">
+        <p className="text-lg md:text-xl text-muted-foreground">
           How to install dependencies and structure your app.
         </p>
       </div>
 
       <div className="space-y-4">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+        <h2 className="scroll-m-20 border-b pb-2 text-2xl md:text-3xl font-semibold tracking-tight first:mt-0">
           Requirements
         </h2>
         <ul className="space-y-2">
@@ -39,7 +39,7 @@ export default function InstallationDocsPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h2 className="scroll-m-20 border-b pb-2 text-2xl md:text-3xl font-semibold tracking-tight">
           Setup
         </h2>
         
@@ -98,7 +98,7 @@ export default function InstallationDocsPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h2 className="scroll-m-20 border-b pb-2 text-2xl md:text-3xl font-semibold tracking-tight">
           Install Components
         </h2>
         <p className="leading-7">
@@ -108,11 +108,11 @@ export default function InstallationDocsPage() {
         <div className="grid gap-4">
           <Card>
             <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center gap-2">
+              <div className="flex items-start justify-between gap-2">
+                <CardTitle className="flex items-center gap-2 flex-1 min-w-0">
                   🔐 Authentication
                 </CardTitle>
-                <Badge>Ready</Badge>
+                <Badge className="shrink-0">Ready</Badge>
               </div>
               <CardDescription>
                 Complete auth system with betterAuth, multiple providers, and guards
@@ -134,11 +134,11 @@ export default function InstallationDocsPage() {
 
           <Card>
             <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center gap-2">
+              <div className="flex items-start justify-between gap-2">
+                <CardTitle className="flex items-center gap-2 flex-1 min-w-0">
                   🌙 Theme Toggle
                 </CardTitle>
-                <Badge>Ready</Badge>
+                <Badge className="shrink-0">Ready</Badge>
               </div>
               <CardDescription>
                 Complete dark mode solution with theme provider and toggle variants
@@ -160,11 +160,11 @@ export default function InstallationDocsPage() {
 
           <Card>
             <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center gap-2">
+              <div className="flex items-start justify-between gap-2">
+                <CardTitle className="flex items-center gap-2 flex-1 min-w-0">
                   📝 Waitlist
                 </CardTitle>
-                <Badge>Ready</Badge>
+                <Badge className="shrink-0">Ready</Badge>
               </div>
               <CardDescription>
                 Complete waitlist system with validation and email confirmations
@@ -186,11 +186,11 @@ export default function InstallationDocsPage() {
 
           <Card>
             <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center gap-2">
+              <div className="flex items-start justify-between gap-2">
+                <CardTitle className="flex items-center gap-2 flex-1 min-w-0">
                   📧 Mailer
                 </CardTitle>
-                <Badge>Ready</Badge>
+                <Badge className="shrink-0">Ready</Badge>
               </div>
               <CardDescription>
                 Universal email system with Resend and Nodemailer support
@@ -213,7 +213,7 @@ export default function InstallationDocsPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h2 className="scroll-m-20 border-b pb-2 text-2xl md:text-3xl font-semibold tracking-tight">
           Manual Installation
         </h2>
         <p className="leading-7">
@@ -229,7 +229,7 @@ export default function InstallationDocsPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h2 className="scroll-m-20 border-b pb-2 text-2xl md:text-3xl font-semibold tracking-tight">
           That's it
         </h2>
         <p className="leading-7">

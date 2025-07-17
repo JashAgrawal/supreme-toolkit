@@ -9,27 +9,29 @@ import { HTMLAttributes, useEffect, useState } from "react";
 
 interface ScriptCopyBtnProps extends HTMLAttributes<HTMLDivElement> {
   showMultiplePackageOptions?: boolean;
-  codeLanguage: string;
-  lightTheme: string;
-  darkTheme: string;
-  commandMap: Record<string, string>;
+  codeLanguage?: string;
+  lightTheme?: string;
+  darkTheme?: string;
+  commandMap?: Record<string, string>;
   className?: string;
+  script?: string; // Add support for direct script prop
 }
 
 export function ScriptCopyBtn({
   showMultiplePackageOptions = true,
-  codeLanguage,
-  lightTheme,
-  darkTheme,
-  commandMap,
+  codeLanguage = "bash",
+  lightTheme = "github-light",
+  darkTheme = "github-dark",
+  commandMap = {},
   className,
+  script,
 }: ScriptCopyBtnProps) {
   const packageManagers = Object.keys(commandMap);
-  const [packageManager, setPackageManager] = useState(packageManagers[0]);
+  const [packageManager, setPackageManager] = useState(packageManagers.length > 0 ? packageManagers[0] : "");
   const [copied, setCopied] = useState(false);
   const [highlightedCode, setHighlightedCode] = useState("");
   const { theme } = useTheme();
-  const command = commandMap[packageManager];
+  const command = script || (packageManager ? commandMap[packageManager] : "");
 
   useEffect(() => {
     async function loadHighlightedCode() {
@@ -62,7 +64,7 @@ export function ScriptCopyBtn({
   return (
     <div
       className={cn(
-        "mx-auto flex max-w-md items-center justify-center",
+        "mx-auto flex w-full max-w-md items-center justify-center",
         className,
       )}
     >
@@ -107,7 +109,7 @@ export function ScriptCopyBtn({
           )}
         </div>
         <div className="relative flex items-center">
-          <div className="min-w-[300px] grow font-mono">
+          <div className="min-w-0 grow font-mono overflow-hidden">
             {highlightedCode ? (
               <div
                 className={`[&>pre]:overflow-x-auto [&>pre]:rounded-md [&>pre]:p-2 [&>pre]:px-4 [&>pre]:font-mono ${

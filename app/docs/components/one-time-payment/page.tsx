@@ -244,7 +244,7 @@ STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret_here`, 'stripe-env')}
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="components" className="space-y-4">
-            <TabsList className="grid w-full grid-cols-4">
+            <TabsList className="grid w-full grid-cols-2 md:grid-cols-4">
               <TabsTrigger value="components">Components</TabsTrigger>
               <TabsTrigger value="hooks">Hooks</TabsTrigger>
               <TabsTrigger value="actions">Actions</TabsTrigger>

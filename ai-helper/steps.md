@@ -123,7 +123,7 @@
 - [ ] Generate registry JSON
 
 ### [ ] 3.2 Chat Realtime Module
-- [ ] Choose and setup realtime provider (Supabase/Pusher)
+- [ ] Choose and setup realtime provider (Convex)
 - [ ] Create chat components (ChatRoom, MessageList, MessageInput)
 - [ ] Implement chat hooks (useChat, useMessages)
 - [ ] Build server actions with events:

@@ -263,17 +263,24 @@ export interface WaitlistEntry {
 
 export interface FeedbackEntry {
   id: string;
-  userId?: string;
-  user?: User;
-  type: 'bug' | 'feature' | 'improvement' | 'other';
-  title: string;
-  description: string;
-  url?: string;
+  type: 'bug' | 'feature' | 'improvement' | 'general' | 'other';
+  rating?: number; // 1-5 stars
+  title?: string;
+  message: string;
+  email?: string;
+  name?: string;
+  user_id?: string;
+  page_url?: string;
+  user_agent?: string;
   screenshot?: string;
-  status: 'open' | 'in_review' | 'planned' | 'completed' | 'rejected';
-  priority?: 'low' | 'medium' | 'high';
-  createdAt: Date;
-  updatedAt: Date;
+  metadata?: Record<string, any>;
+  status: 'new' | 'in_review' | 'planned' | 'in_progress' | 'completed' | 'rejected' | 'open';
+  priority: 'low' | 'medium' | 'high' | 'urgent';
+  tags?: string[];
+  created_at: Date;
+  updated_at: Date;
+  resolved_at?: Date;
+  admin_notes?: string;
 }
 
 // ============================================================================

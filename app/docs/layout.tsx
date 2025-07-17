@@ -14,6 +14,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
+  SidebarTrigger,
 } from "@/components/ui/sidebar";
 
 const sidebarItems : { title: string; items: { title: string; href: string; disabled?: boolean }[] }[] = [
@@ -22,33 +23,35 @@ const sidebarItems : { title: string; items: { title: string; href: string; disa
     items: [
       { title: "Introduction", href: "/docs" },
       { title: "Installation", href: "/docs/installation" },
+      { title: "All Modules", href: "/docs/modules" },
     ]
   },
   {
-    title: "Components",
+    title: "Core Components",
     items: [
       { title: "Authentication", href: "/docs/components/authentication" },
       { title: "Mailer", href: "/docs/components/mailer" },
       { title: "Waitlist", href: "/docs/components/waitlist" },
       { title: "Theme Toggle", href: "/docs/components/theme-toggle" },
+    ]
+  },
+  {
+    title: "Payment Components",
+    items: [
       { title: "One-time Payment", href: "/docs/components/one-time-payment" },
       { title: "Subscriptions", href: "/docs/components/subscriptions" },
       { title: "Customer Portal", href: "/docs/components/customer-portal" },
     ]
   },
   {
-    title: "Coming Soon",
+    title: "Advanced Modules",
     items: [
-      { title: "Realtime Chat", href: "/docs/components/chat-realtime", disabled: true },
-      { title: "GPT Chatbot", href: "/docs/components/chatbot-gpt", disabled: true },
-      { title: "Support Tickets", href: "/docs/components/support-tickets", disabled: true },
-      { title: "Webhook Handler", href: "/docs/components/webhook-handler", disabled: true },
-      { title: "Newsletter", href: "/docs/components/newsletter", disabled: true },
-      { title: "Feedback Widget", href: "/docs/components/feedback-widget", disabled: true },
-      { title: "Image Uploader", href: "/docs/components/image-uploader", disabled: true },
-      { title: "Analytics", href: "/docs/components/analytics", disabled: true },
-      { title: "Rich Text Editor", href: "/docs/components/rich-text-editor", disabled: true },
-      { title: "Webhook Logger", href: "/docs/components/webhook-logger", disabled: true },
+      { title: "Real-time Chat", href: "/docs/modules/chat-realtime" },
+      { title: "AI Chatbot", href: "/docs/modules/chatbot-gpt" },
+      { title: "Support Tickets", href: "/docs/modules/support-ticket-system" },
+      { title: "Feedback Widget", href: "/docs/modules/feedback-widget" },
+      { title: "Image Uploader", href: "/docs/modules/image-uploader" },
+      { title: "Rich Text Editor", href: "/docs/modules/rich-text-editor" },
     ]
   }
 ];
@@ -103,6 +106,15 @@ export default function DocsLayout({
           <header className="sticky top-0 z-50 w-full border-b dark:bg-black backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="flex h-14 items-center gap-4 px-4">
               <div className="flex flex-1 items-center justify-between">
+                {/* Mobile menu trigger */}
+                <div className="flex items-center gap-2 md:hidden">
+                  <SidebarTrigger />
+                  <Link href="/" className="transition-colors hover:text-foreground/80 text-foreground font-extrabold text-lg">
+                    {"{</>}"}
+                  </Link>
+                </div>
+
+                {/* Desktop navigation */}
                 <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
                   <Link href="/" className="transition-colors hover:text-foreground/80 text-foreground/60 font-extrabold text-xl">
                     {"{</>}"}
@@ -110,13 +122,14 @@ export default function DocsLayout({
                   <Link href="/docs" className="transition-colors hover:text-foreground/80 text-foreground/60">
                     Docs
                   </Link>
-                  <Link href="/docs/components/authentication" className="transition-colors hover:text-foreground/80 text-foreground/60">
-                    Components
+                  <Link href="/docs/modules" className="transition-colors hover:text-foreground/80 text-foreground/60">
+                    Modules
                   </Link>
                   <Link href="/docs/installation" className="transition-colors hover:text-foreground/80 text-foreground/60">
                     Installation
                   </Link>
                 </nav>
+
                 <div className="flex items-center">
                   <ThemeToggleDropdown />
                 </div>
@@ -125,14 +138,14 @@ export default function DocsLayout({
           </header>
 
           {/* Main content */}
-          <main className="flex-1 p-6 pl-96">
+          <main className="flex-1 p-4 md:p-6 md:pl-96">
             <div className="mx-auto max-w-4xl">
               {children}
             </div>
           </main>
 
           {/* Footer */}
-          <div className="pl-96">
+          <div className="md:pl-96">
             <Footer />
           </div>
         </SidebarInset>

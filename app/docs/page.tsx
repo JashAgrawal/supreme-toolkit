@@ -7,16 +7,16 @@ export default function DocsPage() {
   return (
     <div className="space-y-6">
       <div className="space-y-3">
-        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
+        <h1 className="scroll-m-20 text-3xl md:text-4xl font-bold tracking-tight">
           Introduction
         </h1>
-        <p className="text-xl text-muted-foreground">
+        <p className="text-lg md:text-xl text-muted-foreground">
           A shadcn-like CLI tool for installing complete full-stack modules with API routes, server actions, hooks, and configuration.
         </p>
       </div>
 
       <div className="space-y-4">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+        <h2 className="scroll-m-20 border-b pb-2 text-2xl md:text-3xl font-semibold tracking-tight first:mt-0">
           What is Supreme Toolkit?
         </h2>
         <p className="leading-7">
@@ -33,7 +33,7 @@ export default function DocsPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h2 className="scroll-m-20 border-b pb-2 text-2xl md:text-3xl font-semibold tracking-tight">
           The Real Power: Predictable, Concept-Based Learning
         </h2>
         <p className="leading-7">
@@ -72,7 +72,7 @@ export default function DocsPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h2 className="scroll-m-20 border-b pb-2 text-2xl md:text-3xl font-semibold tracking-tight">
           Features
         </h2>
         <div className="grid gap-4 md:grid-cols-2">
@@ -131,7 +131,7 @@ export default function DocsPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h2 className="scroll-m-20 border-b pb-2 text-2xl md:text-3xl font-semibold tracking-tight">
           Available Modules
         </h2>
         <div className="grid gap-3">
@@ -190,7 +190,7 @@ export default function DocsPage() {
             <div className="space-y-1">
               <h3 className="font-medium">💬 Realtime Chat</h3>
               <p className="text-sm text-muted-foreground">
-                Realtime chat system with Supabase or Pusher backend
+                Realtime chat system with Convex backend
               </p>
             </div>
             <Badge variant="secondary">Coming Soon</Badge>
@@ -289,21 +289,21 @@ export default function DocsPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h2 className="scroll-m-20 border-b pb-2 text-2xl md:text-3xl font-semibold tracking-tight">
           Quick Start
         </h2>
         <p className="leading-7">
           Get started by installing your first module. All modules work with the existing shadcn/ui setup.
         </p>
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-4">
           <Button asChild>
             <Link href="/docs/installation">
               Get Started
             </Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link href="/docs/components/authentication">
-              Browse Components
+            <Link href="/docs/modules">
+              Browse Modules
             </Link>
           </Button>
         </div>

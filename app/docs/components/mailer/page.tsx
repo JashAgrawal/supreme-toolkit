@@ -23,8 +23,8 @@ export default function MailerPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">📧 Mailer Module</h1>
-        <p className="text-lg text-muted-foreground mt-2">
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight">📧 Mailer Module</h1>
+        <p className="text-base md:text-lg text-muted-foreground mt-2">
           Universal email system with auto-detection for Resend and Nodemailer, email templates, and testing components.
         </p>
       </div>

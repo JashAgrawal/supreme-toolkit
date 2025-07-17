@@ -97,8 +97,8 @@
       "name": "waitlist-module",
       "type": "registry:component",
       "title": "Waitlist Component",
-      "description": "Complete waitlist system with email collection, validation, duplicate checking, and email confirmations",
-      "dependencies": ["zod"],
+      "description": "Complete waitlist system with email collection, validation, duplicate checking, and email confirmations using Convex database",
+      "dependencies": ["zod", "convex"],
       "registryDependencies": ["button", "input", "label", "card"],
       "files": [
         {
@@ -110,8 +110,31 @@
           "type": "registry:hook"
         },
         {
+          "path": "hooks/use-waitlist-convex.ts",
+          "type": "registry:hook"
+        },
+        {
           "path": "actions/waitlist-actions.ts",
           "type": "registry:lib"
+        },
+        {
+          "path": "lib/convex.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "convex/schema.ts",
+          "type": "registry:lib",
+          "target": "convex/schema.ts"
+        },
+        {
+          "path": "convex/waitlist.ts",
+          "type": "registry:lib",
+          "target": "convex/waitlist.ts"
+        },
+        {
+          "path": "convex/users.ts",
+          "type": "registry:lib",
+          "target": "convex/users.ts"
         },
         {
           "path": "app/api/waitlist/route.ts",
@@ -269,11 +292,65 @@
       ]
     },
     {
+      "name": "convex-database",
+      "type": "registry:component",
+      "title": "Convex Database Integration",
+      "description": "Complete Convex database setup with schema, queries, mutations, and utilities for all Supreme Toolkit modules",
+      "dependencies": ["convex"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "convex/schema.ts",
+          "type": "registry:lib",
+          "target": "convex/schema.ts"
+        },
+        {
+          "path": "convex/users.ts",
+          "type": "registry:lib",
+          "target": "convex/users.ts"
+        },
+        {
+          "path": "convex/waitlist.ts",
+          "type": "registry:lib",
+          "target": "convex/waitlist.ts"
+        },
+        {
+          "path": "convex/support.ts",
+          "type": "registry:lib",
+          "target": "convex/support.ts"
+        },
+        {
+          "path": "convex/feedback.ts",
+          "type": "registry:lib",
+          "target": "convex/feedback.ts"
+        },
+        {
+          "path": "convex/chat.ts",
+          "type": "registry:lib",
+          "target": "convex/chat.ts"
+        },
+        {
+          "path": "convex/analytics.ts",
+          "type": "registry:lib",
+          "target": "convex/analytics.ts"
+        },
+        {
+          "path": "convex/notifications.ts",
+          "type": "registry:lib",
+          "target": "convex/notifications.ts"
+        },
+        {
+          "path": "lib/convex.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
       "name": "config-module",
       "type": "registry:component",
       "title": "Supreme Toolkit Configuration",
-      "description": "Central configuration system for managing API keys, settings, and module configurations",
-      "dependencies": [],
+      "description": "Central configuration system for managing API keys, settings, and module configurations with Convex support",
+      "dependencies": ["convex"],
       "registryDependencies": [],
       "files": [
         {
@@ -282,8 +359,309 @@
           "target": "config.tsx"
         },
         {
-          "path": "types/index.ts",
+          "path": "lib/config/auth.ts",
           "type": "registry:lib"
+        },
+        {
+          "path": "lib/config/stripe.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lib/config/mailer.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lib/config/chat.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lib/config/chatbot.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lib/config/support.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lib/config/feedback.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lib/config/image-uploader.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lib/config/rich-text-editor.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lib/config/waitlist.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "chatbot-gpt",
+      "type": "registry:component",
+      "title": "AI Chatbot",
+      "description": "AI chatbot widget with OpenAI integration, streaming responses, conversation management, and customizable interface",
+      "dependencies": ["date-fns"],
+      "registryDependencies": ["button", "card", "input", "textarea", "avatar", "scroll-area", "badge"],
+      "files": [
+        {
+          "path": "lib/openai-utils.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "types/chatbot.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "hooks/use-chatbot.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "components/ui/chatbot-widget.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/chatbot-message.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/chatbot-input.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "actions/chatbot-actions.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "app/api/chatbot/chat/route.ts",
+          "type": "registry:lib",
+          "target": "app/api/chatbot/chat/route.ts"
+        },
+        {
+          "path": "app/api/chatbot/conversations/route.ts",
+          "type": "registry:lib",
+          "target": "app/api/chatbot/conversations/route.ts"
+        }
+      ]
+    },
+    {
+      "name": "support-ticket-system",
+      "type": "registry:component",
+      "title": "Support Tickets",
+      "description": "Complete support ticket system with ticket creation, status management, comments, categories, and admin dashboard using Convex database",
+      "dependencies": ["date-fns", "convex"],
+      "registryDependencies": ["button", "card", "input", "textarea", "select", "badge", "scroll-area"],
+      "files": [
+        {
+          "path": "lib/ticket-utils.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lib/support-convex.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "types/tickets.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "convex/support.ts",
+          "type": "registry:lib",
+          "target": "convex/support.ts"
+        },
+        {
+          "path": "hooks/use-tickets.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "components/ui/ticket-form.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/ticket-list.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/ticket-details.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/ticket-comments.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "actions/ticket-actions.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "app/api/tickets/route.ts",
+          "type": "registry:lib",
+          "target": "app/api/tickets/route.ts"
+        },
+        {
+          "path": "app/api/tickets/[id]/route.ts",
+          "type": "registry:lib",
+          "target": "app/api/tickets/[id]/route.ts"
+        },
+        {
+          "path": "app/api/tickets/[id]/comments/route.ts",
+          "type": "registry:lib",
+          "target": "app/api/tickets/[id]/comments/route.ts"
+        }
+      ]
+    },
+    {
+      "name": "feedback-widget",
+      "type": "registry:component",
+      "title": "Feedback Widget",
+      "description": "User feedback collection widget with ratings, screenshots, categories, and admin dashboard for managing feedback using Convex database",
+      "dependencies": ["convex"],
+      "registryDependencies": ["button", "card", "input", "textarea", "select", "badge"],
+      "files": [
+        {
+          "path": "lib/feedback-utils.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "actions/feedback-convex-actions.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "types/feedback.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "convex/feedback.ts",
+          "type": "registry:lib",
+          "target": "convex/feedback.ts"
+        },
+        {
+          "path": "hooks/use-feedback.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "components/ui/feedback-widget.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/feedback-form.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/feedback-rating.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/feedback-dashboard.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "actions/feedback-actions.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "app/api/feedback/route.ts",
+          "type": "registry:lib",
+          "target": "app/api/feedback/route.ts"
+        },
+        {
+          "path": "app/api/feedback/[id]/route.ts",
+          "type": "registry:lib",
+          "target": "app/api/feedback/[id]/route.ts"
+        }
+      ]
+    },
+    {
+      "name": "image-uploader",
+      "type": "registry:component",
+      "title": "Image Uploader",
+      "description": "Complete image upload system with drag & drop, progress tracking, cloud storage integration, and image management",
+      "dependencies": [],
+      "registryDependencies": ["button", "card", "progress", "badge"],
+      "files": [
+        {
+          "path": "lib/image-utils.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "types/image-uploader.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "hooks/use-image-upload.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "hooks/use-image-gallery.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "components/ui/image-uploader.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/image-dropzone.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/image-preview.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/image-gallery.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "actions/image-actions.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "app/api/images/upload/route.ts",
+          "type": "registry:lib",
+          "target": "app/api/images/upload/route.ts"
+        },
+        {
+          "path": "app/api/images/[id]/route.ts",
+          "type": "registry:lib",
+          "target": "app/api/images/[id]/route.ts"
+        }
+      ]
+    },
+    {
+      "name": "rich-text-editor",
+      "type": "registry:component",
+      "title": "Rich Text Editor",
+      "description": "Feature-rich WYSIWYG text editor with toolbar, formatting options, image upload, link insertion, and export capabilities",
+      "dependencies": [],
+      "registryDependencies": ["button", "card", "separator", "select", "popover", "input", "label", "badge"],
+      "files": [
+        {
+          "path": "lib/editor-utils.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "types/editor.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "hooks/use-rich-text-editor.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "components/ui/rich-text-editor.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/editor-toolbar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/editor-status-bar.tsx",
+          "type": "registry:component"
         }
       ]
     }

@@ -21,8 +21,8 @@ const [copiedCode, setCopiedCode] = useState<string | null>(null);
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">🔐 Authentication Module</h1>
-        <p className="text-lg text-muted-foreground mt-2">
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight">🔐 Authentication Module</h1>
+        <p className="text-base md:text-lg text-muted-foreground mt-2">
           Complete authentication system with betterAuth, multiple providers, and auth guards for Next.js applications.
         </p>
       </div>
